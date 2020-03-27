@@ -1,0 +1,61 @@
+article {
+    height: 450px;
+    overflow-y: hidden;
+}
+
+article>div>img {
+    height: 100%;
+    object-fit: cover;
+}
+
+#description {
+    background-image: url("images/ciudad.png");
+    background-repeat: no-repeat;
+    background-size: auto;
+    background-position-y: 90px;
+    background-position-x: center;
+    height: 250px;
+}
+
+#info {
+    height: auto;
+    background-color: rgba(54, 55, 86, 1);
+
+}
+
+#info>div>div>h3>strong {
+    color: gold !important;
+}
+
+
+.carousel-item>img {
+    background: #0f0c29;  /* fallback for old browsers */
+    background: -webkit-linear-gradient(to right, #24243e6c, #302b636c, #0f0c296c);  /* Chrome 10-25, Safari 5.1-6 */
+    background: linear-gradient(to right, #24243e6c, #302b636c, #0f0c296c); /* W3C, IE 10+/ Edge, Firefox 16+, Chrome 26+, Opera 12+, Safari 7+ */
+
+}
+
+.carousel {
+    z-index: 0;
+    padding: 0;
+}
+
+#info>div>#info-create {
+    border-left: solid;
+    border-right: solid;
+} 
+
+#info-images>article>div>img {
+    height: 200px;
+}
+
+#info-images>article {
+    height: auto !important;
+}
+
+@media only screen and (max-width: 991px) {
+    #info>div>#info-create {
+        border-left: none;
+        border-right: none;
+    } 
+}
