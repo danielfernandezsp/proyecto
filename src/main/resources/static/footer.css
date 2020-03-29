@@ -1,6 +1,71 @@
 footer {
-    background-color: rgb(58, 55, 55) !important; 
-    -webkit-box-shadow: 0px 3px 13px 0px rgba(0,0,0,0.75);
-    -moz-box-shadow: 0px 3px 13px 0px rgba(0,0,0,0.75);
-    box-shadow: 0px 3px 13px 0px rgba(0,0,0,0.75);
+    background-color: rgb(58, 55, 55) !important;
+    -webkit-box-shadow: 0px 3px 13px 0px rgba(0, 0, 0, 0.75);
+    -moz-box-shadow: 0px 3px 13px 0px rgba(0, 0, 0, 0.75);
+    box-shadow: 0px 3px 13px 0px rgba(0, 0, 0, 0.75);
+}
+
+.fa {
+    clip-path: polygon(0% 0%, 100% 0%, 100% 75%, 75% 75%, 75% 100%, 50% 75%, 0% 75%);
+    padding-bottom: 20px;
+    padding-top: 10px;
+    font-size: 35px;
+    width: 50px;
+    text-align: center;
+    text-decoration: none;
+    margin: 5px 2px;
+    -webkit-box-shadow: 0px 3px 13px 0px rgba(0, 0, 0, 0.75);
+    -moz-box-shadow: 0px 3px 13px 0px rgba(0, 0, 0, 0.75);
+    box-shadow: 0px 3px 13px 0px rgba(0, 0, 0, 0.75);
+}
+
+.fa:hover {
+    color: gold;
+    text-decoration: none;
+}
+
+.fa-facebook {
+    background: #3B5998;
+    color: white;
+}
+
+.fa-twitter {
+    background: #55ACEE;
+    color: white;
+}
+
+.fa-youtube {
+    background: #bb0000;
+    color: white;
+}
+
+.fa-instagram {
+    background: #f09433;
+    background: -moz-linear-gradient(45deg, #f09433 0%, #e6683c 25%, #dc2743 50%, #cc2366 75%, #bc1888 100%);
+    background: -webkit-linear-gradient(45deg, #f09433 0%, #e6683c 25%, #dc2743 50%, #cc2366 75%, #bc1888 100%);
+    background: linear-gradient(45deg, #f09433 0%, #e6683c 25%, #dc2743 50%, #cc2366 75%, #bc1888 100%);
+    filter: progid:DXImageTransform.Microsoft.gradient(startColorstr='#f09433', endColorstr='#bc1888', GradientType=1);
+    color: white;
+}
+
+#logos {
+    border-left: solid 1px;
+    border-right: solid 1px;
+    margin: auto;
+}
+
+@media only screen and (max-width: 991px) {
+    #logos {
+        border-left: none;
+        border-right: none;
+    }
+}
+
+ul {
+    padding-left: 0 !important;
+    list-style: none;
+}
+
+p {
+    font-size: 14px;
 }

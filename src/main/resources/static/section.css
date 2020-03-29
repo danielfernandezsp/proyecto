@@ -19,21 +19,21 @@ article>div>img {
 
 #info {
     height: auto;
-    background-color: rgba(54, 55, 86, 1);
+    background-color: #FFAB60;
+    -webkit-box-shadow: 0px 3px 13px 0px rgba(0, 0, 0, 0.75);
+    -moz-box-shadow: 0px 3px 13px 0px rgba(0, 0, 0, 0.75);
+    box-shadow: 0px 3px 13px 0px rgba(0, 0, 0, 0.75);
 
+}
+
+#info>h2 {
+    color: rgb(100, 24, 119);
 }
 
 #info>div>div>h3>strong {
     color: gold !important;
 }
 
-
-.carousel-item>img {
-    background: #0f0c29;  /* fallback for old browsers */
-    background: -webkit-linear-gradient(to right, #24243e6c, #302b636c, #0f0c296c);  /* Chrome 10-25, Safari 5.1-6 */
-    background: linear-gradient(to right, #24243e6c, #302b636c, #0f0c296c); /* W3C, IE 10+/ Edge, Firefox 16+, Chrome 26+, Opera 12+, Safari 7+ */
-
-}
 
 .carousel {
     z-index: 0;
@@ -43,19 +43,89 @@ article>div>img {
 #info>div>#info-create {
     border-left: solid;
     border-right: solid;
-} 
+}
 
-#info-images>article>div>img {
-    height: 200px;
+#info-images>article {
+    background-color: rgba(54, 55, 86, 1);
+    -webkit-box-shadow: 0px 3px 13px 0px rgba(0, 0, 0, 0.75);
+    -moz-box-shadow: 0px 3px 13px 0px rgba(0, 0, 0, 0.75);
+    box-shadow: 0px 3px 13px 0px rgba(0, 0, 0, 0.75);
+
 }
 
 #info-images>article {
     height: auto !important;
 }
 
+#info-images>article>#info-image {
+    padding: 0;
+}
+
 @media only screen and (max-width: 991px) {
     #info>div>#info-create {
         border-left: none;
         border-right: none;
-    } 
+    }
+}
+
+
+#info-event {
+    background: #141E30;
+    /* fallback for old browsers */
+    background: -webkit-linear-gradient(to right, rgba(36, 59, 85, 0.8), rgba(20, 30, 48, 0.8)), url("images/alcazar.jpg");
+    /* Chrome 10-25, Safari 5.1-6 */
+    background: linear-gradient(to right, rgba(36, 59, 85, 0.8), rgba(20, 30, 48, 0.8)), url("images/alcazar.jpg");
+    /* W3C, IE 10+/ Edge, Firefox 16+, Chrome 26+, Opera 12+, Safari 7+ */
+    background-size: cover;
+}
+
+#info-create {
+    background: #141E30;
+    /* fallback for old browsers */
+    background: -webkit-linear-gradient(to right, rgba(36, 59, 85, 0.8), rgba(20, 30, 48, 0.8)), url("images/antique.jpg");
+    /* Chrome 10-25, Safari 5.1-6 */
+    background: linear-gradient(to right, rgba(36, 59, 85, 0.8), rgba(20, 30, 48, 0.8)), url("images/antique.jpg");
+    /* W3C, IE 10+/ Edge, Firefox 16+, Chrome 26+, Opera 12+, Safari 7+ */
+    background-size: cover;
+}
+
+#info-share {
+    background: #141E30;
+    /* fallback for old browsers */
+    background: -webkit-linear-gradient(to right, rgba(36, 59, 85, 0.8), rgba(20, 30, 48, 0.8)), url("images/catedral.jpg");
+    /* Chrome 10-25, Safari 5.1-6 */
+    background: linear-gradient(to right, rgba(36, 59, 85, 0.8), rgba(20, 30, 48, 0.8)), url("images/catedral.jpg");
+    /* W3C, IE 10+/ Edge, Firefox 16+, Chrome 26+, Opera 12+, Safari 7+ */
+    background-size: cover;
+}
+
+#info>.row>div>img {
+    margin: 10px;
+    bottom: 0;
+}
+
+#info>.row>div {
+    margin-bottom: 0 !important;
+}
+
+hr {
+    border: 0;
+    height: 2px;
+    text-align: center;
+    background: linear-gradient(to left, rgba(255, 255, 255, 0), #fff, rgba(255, 255, 255, 0));
+}
+
+.images-exp{
+    padding: 0 !important;
+}
+
+article>div>.row{
+  opacity: 1;
+  transition: .5s ease;
+  background-color: grey;
+}
+
+
+.images-exp:hover{
+    opacity: 0.7;
 }

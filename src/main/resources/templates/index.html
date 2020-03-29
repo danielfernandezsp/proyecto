@@ -15,6 +15,10 @@
 	<link rel="stylesheet" href="section.css">
 	<link rel="stylesheet" href="footer.css">
 	<link rel="stylesheet" href="body.css">
+	<script src="js/javascript.js"></script>
+	<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/animate.css/3.7.2/animate.min.css">
+	<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css">
+
 
 
 	<link href="https://fonts.googleapis.com/css?family=Gentium+Book+Basic&display=swap" rel="stylesheet">
@@ -39,7 +43,7 @@
 					<li class="nav-item"><a class="nav-link" href="#">Conócenos</a></li>
 				</ul>
 
-				<a class="navbar-brand d-none d-lg-inline" href="#"> <img src="images/logo.png" height="60"
+				<a class="navbar-brand d-none d-lg-inline  animated bounce fadeIn" href="#"> <img src="images/logo.png" height="60"
 						class="d-inline-block align-top" alt="">
 				</a>
 
@@ -54,7 +58,7 @@
 
 	<!-- H1 y H2 de la página -->
 	<div class="container-fluid" id="description">
-		<h1 class="text-center">¡Descubre la capital de Andalucía!</h1>
+		<h1 class="text-center animated bounce bounceInDown">¡Descubre la capital de Andalucía!</h1>
 	</div>
 
 	<!-- Carousel de fotos -->
@@ -84,65 +88,87 @@
 		<article class="container-fluid text-center" id="info">
 			<h2>Explora los rincones de esta bella ciudad</h2>
 			<div class="row">
-				<div class="col-12 col-lg-4 mt-4 mb-4" id="info-event">
+				<div class="col-12 col-lg-4 mt-2 mb-4" id="info-event">
 
 					<h3>Eventos disponibles</h3>
+					<hr>
 					<h5>Te vamos a mostrar todas las actividades que puedes realizar en esta ciudad al alcance de un
 						solo clic. Puedes elegir entre diferentes categorias de evento segun tus gustos personales
-						(museos, discotecas, acuarios, musica, etc)</h5>
+						(museos, discotecas, acuarios, musica en directo, etc)</h5>
 					<img src="images/calendar.png" alt="" height="60">
 				</div>
-				<div class="col-12 col-lg-4 mt-4 mb-4" id="info-create">
+				<div class="col-12 col-lg-4 mt-2 mb-4" id="info-create">
 
 					<h3>Crea tus eventos</h3>
+					<hr>
 					<h5>Puedes crear tus propios eventos. Nosotros revisaremos el evento y si esta todo correcto lo
 						publicaremos en este sitio web para que de esta manera pueda llegar a mas personas y asi tu
 						evento sea todo un verdadero exito.</h5>
 					<img src="images/create.png" alt="" height="60">
 
 				</div>
-				<div class="col-12 col-lg-4 mt-4 mb-4" id="info-share">
+				<div class="col-12 col-lg-4 mt-2 mb-4" id="info-share">
 
 					<h3>Comparte los eventos</h3>
+					<hr>
 					<h5>Puedes compartir los eventos con las personas que tu quieras, solo tienes que seguirnos en
-						nuestras redes sociales, alli publicamos todos los eventos y es mas facil de darlos a conocer y
-						compartirlos con mas personas.</h5>
+						nuestras redes sociales, alli publicamos todos los eventos y es más facil darlos a conocer y
+						compartirlos con muchas más personas.</h5>
 					<img src="images/share.png" alt="" height="60">
 
 				</div>
 			</div>
 		</article>
 
-		<div id="info-images">
-			<article class="row mt-5">
-				<div class="col-12 col-lg-5"> <img class="d-block w-100" src="images/alcazar-piano.jpg" alt="..."> </div>
-				<div class="col-12 col-lg-7">
-					<h5>Lorem ipsum dolor sit amet consectetur adipisicing elit. Sit eligendi quisquam odio ducimus
-						doloribus
-						reiciendis asperiores saepe a voluptatum! Praesentium eum ut tempore reiciendis culpa aliquid velit
-						quae? Nesciunt suscipit molestiae aut vel</h5>
-				</div>
-			</article>
+		<div class="container-fluid" id="info-images">
 			<article class="row mt-5">
 				<div class="col-12 col-lg-7 order-2 order-lg-1">
-					<h5>Lorem ipsum dolor sit amet consectetur adipisicing elit. Sit eligendi quisquam odio ducimus
-						doloribus
-						reiciendis asperiores saepe a voluptatum! Praesentium eum ut tempore reiciendis culpa aliquid velit
-						quae? Nesciunt suscipit molestiae aut vel</h5>
+					<h2>Todo tipo de eventos te esperan</h2>
+					<h5>Una gran variedad de eventos te estan esperando tanto si te gusta la buena musica en directo, como si te
+						llama una nueva exposicion de arte en el museo de bellas artes</h5>
+					<div class="row">
+						<div class="col-4 images-exp"><img onmouseover="photoSelect('antique')" class="d-block w-100" src="images/antique.jpg" alt="..."></div>
+						<div class="col-4 images-exp"><img onmouseover="photoSelect('torre-del-oro')" class="d-block w-100" src="images/torre-del-oro.jpg" alt="..."></div>
+						<div class="col-4 images-exp"><img onmouseover="photoSelect('alcazar')" class="d-block w-100" src="images/alcazar.jpg" alt="..."></div>
+						<div class="col-4 images-exp"><img onmouseover="photoSelect('catedral')" class="d-block w-100" src="images/catedral.jpg" alt="..."></div>
+						<div class="col-4 images-exp"><img onmouseover="photoSelect('las-setas')" class="d-block w-100" src="images/las-setas.jpg" alt="..."></div>
+						<div class="col-4 images-exp"><img onmouseover="photoSelect('maestranza')" class="d-block w-100" src="images/maestranza.jpg" alt="..."></div>
+					</div>
 				</div>
-				<div class="col-12 col-lg-5 order-1 order-lg-2"> <img class="d-block w-100" src="images/concierto.jpg"
-						alt="..."> </div>
+				<div class="col-12 col-lg-5 order-1 order-lg-2" id="info-image"> 
+					<img class="d-block w-100" src="images/concierto.jpg" alt="..."> 
+				</div>
 			</article>
 		</div>
-		
+
 	</section>
 
 	<!-- Footer de la página -->
-	<footer class="jumbotron jumbotron-fluid mt-5 mb-0">
-		<div class="container">
-			<h1 class="display-4">Footer</h1>
-			<p class="lead">This is a modified jumbotron that occupies the entire horizontal space of its parent.</p>
+	<footer class="jumbotron mt-5 mb-0">
+		<div class="row">
+			<div id="social" class="col-12 col-lg-3 mb-3 text-center">
+				<a href="#" class="fa fa-instagram"></a>
+				<a href="#" class="fa fa-youtube"></a>
+				<a href="#" class="fa fa-twitter"></a>
+				<a href="#" class="fa fa-facebook"></a>
+			</div>
+			<div class="row col-12 col-lg-6" id="logos">
+				<img class="col-4 mb-3" src="images/logo-catedral.png" alt="">
+				<img class="col-4 mb-3" src="images/logo-acuario.png" alt="">
+				<img class="col-4 mb-3" src="images/logo-alcazar.png" alt="">
+				<img class="col-4 mb-3" src="images/logo-maestranza.png" alt="">
+				<img class="col-4 mb-3" src="images/logo-setas.png" alt="">
+				<img class="col-4 mb-3" src="images/logo-antique.png" alt="">
+			</div>
+			<div class="col-12 col-lg-3 text-center mt-3" id="ad">
+				<ul>
+					<li><a href="#">Politicas de privacidad</a></li>
+					<li><a href="#">Politicas de cookies</a></li>
+					<li><a href="#">Aviso legal</a></li>
+				</ul>
+			</div>
 		</div>
+		<p class="text-center mt-4">Web realizada por Daniel Fernández Sánchez-Palencia</p>
 	</footer>
 
 
