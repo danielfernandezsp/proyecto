@@ -61,6 +61,10 @@ article>div>img {
     padding: 0;
 }
 
+#info-images>article>div>h2 {
+	color: gold;
+}
+
 @media only screen and (max-width: 991px) {
     #info>div>#info-create {
         border-left: none;
