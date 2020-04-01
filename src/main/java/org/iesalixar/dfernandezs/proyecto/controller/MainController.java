@@ -9,11 +9,7 @@ public class MainController {
 
 	@RequestMapping("index.htm")
     public ModelAndView index(){
-        ModelAndView res=new ModelAndView();
-//        String consulta="select * from cliente";
-//        List datos    =this.template.queryForList(consulta);
-//        ArrayList<String> paraEnviar=new ArrayList();
-       
+        ModelAndView res=new ModelAndView(); 
         return res;
     }       
 }
