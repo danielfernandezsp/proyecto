@@ -1,6 +1,7 @@
 package org.iesalixar.dfernandezs.proyecto.model;
 
 import java.io.Serializable;
+import java.time.LocalDateTime;
 import java.util.Date;
 
 import javax.persistence.*;

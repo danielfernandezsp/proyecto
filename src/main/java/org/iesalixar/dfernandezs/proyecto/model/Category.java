@@ -1,6 +1,8 @@
 package org.iesalixar.dfernandezs.proyecto.model;
 
 import java.io.Serializable;
+import java.util.HashSet;
+import java.util.Set;
 
 import javax.persistence.*;
 
@@ -9,14 +11,13 @@ public class Category implements Serializable {
 
 	@Id
 	@GeneratedValue(strategy=GenerationType.IDENTITY)
-	private long id;
+	private long category_id;
 	
 	@Column(unique = true, length = 20, nullable = false)
 	private String name = "";
 	
-	@ManyToOne
-	@JoinColumn(name = "FK_EVENT", nullable = true, updatable = false)
-	private Event event = null;
+	@ManyToMany(mappedBy = "categories")
+	private Set<Event> events = new HashSet<Event>();
 	
 	public Category() {
 		
@@ -35,13 +36,15 @@ public class Category implements Serializable {
 		this.name = name;
 	}
 
-	public Event getEvent() {
-		return event;
+	public Set<Event> getEvents() {
+		return events;
 	}
 
-	public void setEvento(Event event) {
-		this.event = event;
+	public void setEvents(Set<Event> events) {
+		this.events = events;
 	}
+
+
 	
 	
 }

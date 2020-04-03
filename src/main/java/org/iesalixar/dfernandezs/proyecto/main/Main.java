@@ -1,23 +1,51 @@
 package org.iesalixar.dfernandezs.proyecto.main;
 
+import java.time.LocalDateTime;
+import java.util.Date;
+import java.util.HashSet;
+import java.util.Set;
+
 import org.iesalixar.dfernandezs.proyecto.ProyectoApplication;
 import org.iesalixar.dfernandezs.proyecto.model.Category;
+import org.iesalixar.dfernandezs.proyecto.model.Comment;
+import org.iesalixar.dfernandezs.proyecto.model.Event;
+import org.iesalixar.dfernandezs.proyecto.model.Forum;
 import org.iesalixar.dfernandezs.proyecto.model.Province;
 import org.iesalixar.dfernandezs.proyecto.model.User;
+import org.iesalixar.dfernandezs.proyecto.repository.CategoryRepository;
+import org.iesalixar.dfernandezs.proyecto.repository.CommentRepository;
+import org.iesalixar.dfernandezs.proyecto.repository.EventRepository;
+import org.iesalixar.dfernandezs.proyecto.repository.ProvinceRepository;
+import org.iesalixar.dfernandezs.proyecto.repository.UserRepository;
+import org.iesalixar.dfernandezs.proyecto.security.SecurityConfig;
+import org.iesalixar.dfernandezs.proyecto.repository.ForumRepository;
+import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.boot.SpringApplication;
 import org.springframework.context.ConfigurableApplicationContext;
-import org.iesalixar.dfernandezs.proyecto.repository.*;
+import org.springframework.security.crypto.bcrypt.BCryptPasswordEncoder;
+import org.springframework.security.crypto.factory.PasswordEncoderFactories;
+import org.springframework.security.crypto.password.PasswordEncoder;
+
+import com.sun.xml.fastinfoset.Encoder;
 
 public class Main {
-
+	
 	public static void main(String[] args) {
 		// TODO Auto-generated method stub
 
+		// Usamos encoder para encriptar las contraseñas 
+		PasswordEncoder encoder = PasswordEncoderFactories.createDelegatingPasswordEncoder();
+		
 		ConfigurableApplicationContext context = SpringApplication.run(ProyectoApplication.class);
 		ProvinceRepository provinceRepository = context.getBean(ProvinceRepository.class);
 		UserRepository userRepository = context.getBean(UserRepository.class);
 		CategoryRepository categoryRepository = context.getBean(CategoryRepository.class);
+		EventRepository eventRepository = context.getBean(EventRepository.class);
+		ForumRepository forumRepository = context.getBean(ForumRepository.class);
+		CommentRepository commentRepository = context.getBean(CommentRepository.class);
 
+		// Creation Date
+		Date date = new Date();
 		
 		// Provinces
 		Province sevilla = new Province();
@@ -45,14 +73,16 @@ public class Main {
 		daniel.setName("Daniel");
 		daniel.setLastName("Fernández Sánchez-Palencia");
 		daniel.setUser("dani");
-		daniel.setPassword("1234");
+		daniel.setBirthday(LocalDateTime.parse("1995-10-06t00:00:00"));
+		daniel.setPassword(encoder.encode("1234"));
 		daniel.setRol("admin");
 		daniel.setEmail("daniel@iesalixar.org");
 		
 		marina.setName("Marina");
 		marina.setLastName("Carrero Granados");
 		marina.setUser("marina");
-		marina.setPassword("1234");
+		marina.setBirthday(LocalDateTime.parse("2000-05-24t00:00:00"));
+		marina.setPassword(encoder.encode("1234"));
 		marina.setRol("user");
 		marina.setEmail("marina@iesalixar.org");
 		
@@ -86,7 +116,50 @@ public class Main {
 		desfile.setName("Desfiles");
 		benefico.setName("Benéficos");
 
+		// Events Forums
+		Set<Category> categories = new HashSet<Category>();
+		categories.add(religioso);
+		categories.add(cultural);
+		categories.add(nocturno);
+		
+		byte[] img = null;
+		LocalDateTime dateStart = LocalDateTime.parse("2020-04-03t09:00:00");
+		LocalDateTime dateEnd = LocalDateTime.parse("2020-04-13t21:00:00");		
+		
+		Event alcazar = new Event();
+		Forum foroAlcazar = new Forum();
 
+		foroAlcazar.setEvent(alcazar);
+		
+		alcazar.setDate(date);
+		alcazar.setName("Real Alcazar");
+		alcazar.setDescription("Visita este gran edificio con cientos de años de historia.");
+		alcazar.setCategories(categories);
+		alcazar.setUser(marina);
+		alcazar.setForum(foroAlcazar);
+		alcazar.setProvince(sevilla);
+		alcazar.setCapacity(20);
+		alcazar.setEnd_event(dateEnd);
+		alcazar.setStart_event(dateStart);
+		alcazar.setForum(foroAlcazar);
+		alcazar.setImage(img);
+		alcazar.setImage(img);
+		
+		// Comments
+		
+		Comment comentario1 = new Comment();
+		Comment comentario2 = new Comment();
+
+		comentario1.setForum(foroAlcazar);
+		comentario1.setUser(marina);
+		comentario1.setDate(date);
+		comentario1.setText("¡Me entantaria ir este sabado!");
+		
+		comentario2.setForum(foroAlcazar);
+		comentario2.setUser(daniel);
+		comentario2.setDate(date);
+		comentario2.setText("Yo fui la semana pasada y mereció la pena.");
+		
 		// Save Provinces
 		provinceRepository.save(sevilla);
 		provinceRepository.save(malaga);
@@ -114,6 +187,16 @@ public class Main {
 		categoryRepository.save(paraNinios);
 		categoryRepository.save(desfile);
 		categoryRepository.save(benefico);
+
+		// Save Events and Forums
+		eventRepository.save(alcazar);
+		forumRepository.save(foroAlcazar);
+
+		// Save Comments
+		commentRepository.save(comentario1);
+		commentRepository.save(comentario2);
+		
+		
 		context.close();
 
 	}

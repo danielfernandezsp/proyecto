@@ -9,7 +9,7 @@ article>div>img {
 }
 
 #description {
-    background-image: url("images/ciudad.png");
+    background-image: url("../images/ciudad.png");
     background-repeat: no-repeat;
     background-size: auto;
     background-position-y: 90px;
@@ -76,9 +76,9 @@ article>div>img {
 #info-event {
     background: #141E30;
     /* fallback for old browsers */
-    background: -webkit-linear-gradient(to right, rgba(36, 59, 85, 0.8), rgba(20, 30, 48, 0.8)), url("images/alcazar.jpg");
+    background: -webkit-linear-gradient(to right, rgba(36, 59, 85, 0.8), rgba(20, 30, 48, 0.8)), url("../images/alcazar.jpg");
     /* Chrome 10-25, Safari 5.1-6 */
-    background: linear-gradient(to right, rgba(36, 59, 85, 0.8), rgba(20, 30, 48, 0.8)), url("images/alcazar.jpg");
+    background: linear-gradient(to right, rgba(36, 59, 85, 0.8), rgba(20, 30, 48, 0.8)), url("../)images/alcazar.jpg");
     /* W3C, IE 10+/ Edge, Firefox 16+, Chrome 26+, Opera 12+, Safari 7+ */
     background-size: cover;
 }
@@ -86,9 +86,9 @@ article>div>img {
 #info-create {
     background: #141E30;
     /* fallback for old browsers */
-    background: -webkit-linear-gradient(to right, rgba(36, 59, 85, 0.8), rgba(20, 30, 48, 0.8)), url("images/antique.jpg");
+    background: -webkit-linear-gradient(to right, rgba(36, 59, 85, 0.8), rgba(20, 30, 48, 0.8)), url("../images/antique.jpg");
     /* Chrome 10-25, Safari 5.1-6 */
-    background: linear-gradient(to right, rgba(36, 59, 85, 0.8), rgba(20, 30, 48, 0.8)), url("images/antique.jpg");
+    background: linear-gradient(to right, rgba(36, 59, 85, 0.8), rgba(20, 30, 48, 0.8)), url("../images/antique.jpg");
     /* W3C, IE 10+/ Edge, Firefox 16+, Chrome 26+, Opera 12+, Safari 7+ */
     background-size: cover;
 }
@@ -96,9 +96,9 @@ article>div>img {
 #info-share {
     background: #141E30;
     /* fallback for old browsers */
-    background: -webkit-linear-gradient(to right, rgba(36, 59, 85, 0.8), rgba(20, 30, 48, 0.8)), url("images/catedral.jpg");
+    background: -webkit-linear-gradient(to right, rgba(36, 59, 85, 0.8), rgba(20, 30, 48, 0.8)), url("../images/catedral.jpg");
     /* Chrome 10-25, Safari 5.1-6 */
-    background: linear-gradient(to right, rgba(36, 59, 85, 0.8), rgba(20, 30, 48, 0.8)), url("images/catedral.jpg");
+    background: linear-gradient(to right, rgba(36, 59, 85, 0.8), rgba(20, 30, 48, 0.8)), url("../images/catedral.jpg");
     /* W3C, IE 10+/ Edge, Firefox 16+, Chrome 26+, Opera 12+, Safari 7+ */
     background-size: cover;
 }

@@ -1,6 +1,7 @@
 package org.iesalixar.dfernandezs.proyecto.model;
 
 import java.io.Serializable;
+import java.time.LocalDateTime;
 import java.util.Date;
 import java.util.HashSet;
 import java.util.Set;
@@ -23,14 +24,14 @@ public class User implements Serializable {
 	@Column(unique = true, length = 50, nullable = false)
 	private String email = "";
 	
-	@Column(length = 20, nullable = false)
+	@Column(length = 20, nullable = false, unique = true)
 	private String user = "";
 	
-	@Column(length = 20, nullable = false)
+	@Column(length = 255, nullable = false)
 	private String password = "";
 	
-	@Column(nullable = true)
-	private Date birthday = new Date();
+	@Column(nullable = false)
+	private LocalDateTime birthday = null;
 	
 	@Column(length = 6, nullable = false)
 	private String rol = "";
@@ -49,7 +50,7 @@ public class User implements Serializable {
 		
 	}
 
-	public User(String name, String lastName, String email, String user, String password, Date birthday, byte[] image) {
+	public User(String name, String lastName, String email, String user, String password, LocalDateTime birthday, byte[] image) {
 		super();
 		this.name = name;
 		this.lastName = lastName;
@@ -100,11 +101,11 @@ public class User implements Serializable {
 		this.password = password;
 	}
 
-	public Date getBirthday() {
+	public LocalDateTime getBirthday() {
 		return birthday;
 	}
 
-	public void setBirthday(Date birthday) {
+	public void setBirthday(LocalDateTime birthday) {
 		this.birthday = birthday;
 	}
 
