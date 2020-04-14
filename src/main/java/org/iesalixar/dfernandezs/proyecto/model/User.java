@@ -2,14 +2,18 @@ package org.iesalixar.dfernandezs.proyecto.model;
 
 import java.io.Serializable;
 import java.time.LocalDateTime;
-import java.util.Date;
 import java.util.HashSet;
 import java.util.Set;
-
 import javax.persistence.*;
+
 
 @Entity
 public class User implements Serializable {
+
+	/**
+	 * 
+	 */
+	private static final long serialVersionUID = 1L;
 
 	@Id
 	@GeneratedValue(strategy=GenerationType.IDENTITY)
@@ -25,7 +29,7 @@ public class User implements Serializable {
 	private String email = "";
 	
 	@Column(length = 20, nullable = false, unique = true)
-	private String user = "";
+	private String username = "";
 	
 	@Column(length = 255, nullable = false)
 	private String password = "";
@@ -33,8 +37,13 @@ public class User implements Serializable {
 	@Column(nullable = false)
 	private LocalDateTime birthday = null;
 	
-	@Column(length = 6, nullable = false)
-	private String rol = "";
+//	@JoinTable(
+//	        name = "user_rol",
+//	        joinColumns = @JoinColumn(name = "user", nullable = false),
+//	        inverseJoinColumns = @JoinColumn(name="rol", nullable = false)
+//	    )
+	@ManyToMany(fetch = FetchType.EAGER)
+	private Set<Authority> authority = new HashSet<Authority>();
 	
 	@OneToMany(cascade = CascadeType.ALL, mappedBy = "user")
 	private Set<Event> events = new HashSet<Event>();
@@ -50,16 +59,22 @@ public class User implements Serializable {
 		
 	}
 
-	public User(String name, String lastName, String email, String user, String password, LocalDateTime birthday, byte[] image) {
-		super();
-		this.name = name;
-		this.lastName = lastName;
-		this.email = email;
-		this.user = user;
-		this.password = password;
-		this.birthday = birthday;
-		this.image = image;
-	}
+//	public User(String username, String password, String authority) {
+//		this.username = username;
+//		this.password = password;
+//		this.authority = authority;
+//	}
+//	
+//	public User(String name, String lastName, String email, String username, String password, LocalDateTime birthday, byte[] image) {
+//		super();
+//		this.name = name;
+//		this.lastName = lastName;
+//		this.email = email;
+//		this.username = username;
+//		this.password = password;
+//		this.birthday = birthday;
+//		this.image = image;
+//	}
 
 	public String getName() {
 		return name;
@@ -85,12 +100,12 @@ public class User implements Serializable {
 		this.email = email;
 	}
 
-	public String getUser() {
-		return user;
+	public String getUsername() {
+		return username;
 	}
 
-	public void setUser(String user) {
-		this.user = user;
+	public void setUsername(String username) {
+		this.username = username;
 	}
 
 	public String getPassword() {
@@ -109,18 +124,21 @@ public class User implements Serializable {
 		this.birthday = birthday;
 	}
 
-	public String getRol() {
-		return rol;
+	
+	
+	public Set<Authority> getAuthority() {
+		return authority;
 	}
 
-	public void setRol(String rol) {
-		this.rol = rol;
+	public void setAuthority(Set<Authority> authority) {
+		this.authority = authority;
 	}
 
 	public Set<Event> getEvents() {
 		return events;
 	}
 
+	
 	public void setEvents(Set<Event> events) {
 		this.events = events;
 	}

@@ -6,27 +6,25 @@ import java.util.HashSet;
 import java.util.Set;
 
 import org.iesalixar.dfernandezs.proyecto.ProyectoApplication;
+import org.iesalixar.dfernandezs.proyecto.model.Authority;
 import org.iesalixar.dfernandezs.proyecto.model.Category;
 import org.iesalixar.dfernandezs.proyecto.model.Comment;
 import org.iesalixar.dfernandezs.proyecto.model.Event;
 import org.iesalixar.dfernandezs.proyecto.model.Forum;
 import org.iesalixar.dfernandezs.proyecto.model.Province;
 import org.iesalixar.dfernandezs.proyecto.model.User;
+import org.iesalixar.dfernandezs.proyecto.repository.AuthorityRepository;
 import org.iesalixar.dfernandezs.proyecto.repository.CategoryRepository;
 import org.iesalixar.dfernandezs.proyecto.repository.CommentRepository;
 import org.iesalixar.dfernandezs.proyecto.repository.EventRepository;
 import org.iesalixar.dfernandezs.proyecto.repository.ProvinceRepository;
 import org.iesalixar.dfernandezs.proyecto.repository.UserRepository;
-import org.iesalixar.dfernandezs.proyecto.security.SecurityConfig;
 import org.iesalixar.dfernandezs.proyecto.repository.ForumRepository;
-import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.boot.SpringApplication;
 import org.springframework.context.ConfigurableApplicationContext;
 import org.springframework.security.crypto.bcrypt.BCryptPasswordEncoder;
-import org.springframework.security.crypto.factory.PasswordEncoderFactories;
-import org.springframework.security.crypto.password.PasswordEncoder;
 
-import com.sun.xml.fastinfoset.Encoder;
+
 
 public class Main {
 	
@@ -34,8 +32,8 @@ public class Main {
 		// TODO Auto-generated method stub
 
 		// Usamos encoder para encriptar las contraseñas 
-		PasswordEncoder encoder = PasswordEncoderFactories.createDelegatingPasswordEncoder();
-		
+		BCryptPasswordEncoder bCryptPasswordEncoder = new BCryptPasswordEncoder(4);
+
 		ConfigurableApplicationContext context = SpringApplication.run(ProyectoApplication.class);
 		ProvinceRepository provinceRepository = context.getBean(ProvinceRepository.class);
 		UserRepository userRepository = context.getBean(UserRepository.class);
@@ -43,6 +41,7 @@ public class Main {
 		EventRepository eventRepository = context.getBean(EventRepository.class);
 		ForumRepository forumRepository = context.getBean(ForumRepository.class);
 		CommentRepository commentRepository = context.getBean(CommentRepository.class);
+		AuthorityRepository authorityRepository = context.getBean(AuthorityRepository.class);
 
 		// Creation Date
 		Date date = new Date();
@@ -66,25 +65,38 @@ public class Main {
 		huelva.setName("Huelva");
 		cadiz.setName("Cádiz");
 
+		// Authorities
+		Authority admin = new Authority();
+		Authority user = new Authority();
+		
+		admin.setAuthority("ADMIN");
+		user.setAuthority("USER");
+		
 		// Users
 		User daniel = new User();
 		User marina = new User();
 		
+		Set<Authority> adminList = new HashSet<Authority>();
+		adminList.add(admin);
+		
+		Set<Authority> userList = new HashSet<Authority>();
+		userList.add(user);
+		
 		daniel.setName("Daniel");
 		daniel.setLastName("Fernández Sánchez-Palencia");
-		daniel.setUser("dani");
+		daniel.setUsername("dani");
 		daniel.setBirthday(LocalDateTime.parse("1995-10-06t00:00:00"));
-		daniel.setPassword(encoder.encode("1234"));
-		daniel.setRol("admin");
+		daniel.setPassword(bCryptPasswordEncoder.encode("1234"));
 		daniel.setEmail("daniel@iesalixar.org");
+		daniel.setAuthority(adminList);
 		
 		marina.setName("Marina");
 		marina.setLastName("Carrero Granados");
-		marina.setUser("marina");
+		marina.setUsername("marina");
 		marina.setBirthday(LocalDateTime.parse("2000-05-24t00:00:00"));
-		marina.setPassword(encoder.encode("1234"));
-		marina.setRol("user");
+		marina.setPassword(bCryptPasswordEncoder.encode("1234"));
 		marina.setEmail("marina@iesalixar.org");
+		marina.setAuthority(userList);
 		
 		// Categories
 		Category musica = new Category();
@@ -170,6 +182,10 @@ public class Main {
 		provinceRepository.save(huelva);
 		provinceRepository.save(cadiz);
 
+		// Save Authority
+		authorityRepository.save(admin);
+		authorityRepository.save(user);
+		
 		// Save Users
 		userRepository.save(daniel);
 		userRepository.save(marina);

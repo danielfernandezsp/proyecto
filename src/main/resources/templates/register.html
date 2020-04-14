@@ -1,5 +1,5 @@
 <!doctype html>
-<html lang="en" xmlns:th="http://www.thymeleaf.org">
+<html lang="en">
 
 <head>
 <title>EventoSSevilla</title>
@@ -24,8 +24,6 @@
 <link rel="stylesheet"
 	href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css">
 <link rel="shortcut icon" href="../images/icono.png" type="image/x-icon">
-
-    <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.3.1/jquery.min.js"></script>
 
 
 <link
@@ -61,8 +59,8 @@
 
 				<ul class="navbar-nav m-auto d-flex justify-item-center">
 					<li class="nav-item"><a class="nav-link" href="#">FAQs</a></li>
-					<li class="nav-item"><a class="nav-link" href="#">Login</a></li>
-					<li class="nav-item"><a class="nav-link" href="/register">Regístrate</a></li>
+					<li class="nav-item"><a class="nav-link" href="/login.html">Login</a></li>
+					<li class="nav-item"><a class="nav-link" href="#">Regístrate</a></li>
 				</ul>
 			</div>
 		</nav>
@@ -70,26 +68,23 @@
 
 	<!-- H1 de la página -->
 	<div class="container-fluid" id="description">
-		<h1 class="text-center animated bounce bounceInDown">¡LOGIN!</h1>
+		<h1 class="text-center animated bounce bounceInDown">¡REGÍSTRATE!</h1>
 	</div>
 
 	<section class="container d-flex justify-content-center">
 		<div class="col-6">
-			<form th:action="@{/login}" method="post">
+			<form>
 				<div class="form-group">
 					<label><strong>Usuário</strong></label> <input type="text"
-						class="form-control" name="userLogin"
+						class="form-control" id="userLogin"
 						aria-describedby="emailHelp">
 				</div>
 				<div class="form-group">
 					<label><strong>Contraseña</strong></label> <input
-						type="password" class="form-control" name="passLogin">
+						type="password" class="form-control" id="passLogin">
 				</div>
 				<button type="submit" class="btn btn-primary">Submit</button>
 			</form>
-		</div>
-		<div th:if="${param.error}" class="alert alert-danger" role="alert">
-			Compruebe sus credenciales.
 		</div>
 	</section>
 

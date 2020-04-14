@@ -2,32 +2,29 @@ package org.iesalixar.dfernandezs.proyecto.controller;
 
 import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.*;
-import org.springframework.web.servlet.ModelAndView;
 
 @Controller
 public class MainController {
 
-//	@RequestMapping("index.htm")
-//    public ModelAndView index(){
-//        ModelAndView res=new ModelAndView(); 
-//        return res;
-//    }
-	
-	@GetMapping({"/"})
+	@GetMapping({"/","/index"})
 	public String index() {
 		return "index";
 	}
 	
+	@GetMapping("/login")
+	public String login() {
+		return "login";
+	}
 	
-	@RequestMapping("/login.htm")
-    public ModelAndView login(){
-        ModelAndView res=new ModelAndView(); 
-        return res;
-    }
+	@GetMapping("/register")
+	public String register() {
+		return "register";
+	}
 	
 	@GetMapping("/private/eventCreator")
-    public ModelAndView priv(){
-        ModelAndView res=new ModelAndView(); 
-        return res;
-    }
+	public String eventCreator() {
+		return "private/eventCreator";
+	
+	}
 }
+	
