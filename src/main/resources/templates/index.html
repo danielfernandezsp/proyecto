@@ -1,5 +1,5 @@
 <!doctype html>
-<html lang="en">
+<html lang="en" xmlns="http://www.w3.org/1999/xhtml" xmlns:th="http://www.thymeleaf.org" xmlns:sec="http://www.thymeleaf.org/extras/spring-security">
 
 <head>
 	<title>EventoSSevilla</title>
@@ -39,7 +39,7 @@
 
 			<div class="collapse navbar-collapse" id="navbarSupportedContent">
 				<ul class="navbar-nav m-auto d-flex justify-item-center">
-					<li class="nav-item"><a class="nav-link" href="#">Eventos</a></li>
+					<li class="nav-item"><a class="nav-link" href="/events">Eventos</a></li>
 					<li class="nav-item"><a class="nav-link" href="#">Foro</a></li>
 					<li class="nav-item"><a class="nav-link" href="#">Conócenos</a></li>
 				</ul>
@@ -50,8 +50,11 @@
 
 				<ul class="navbar-nav m-auto d-flex justify-item-center">
 					<li class="nav-item"><a class="nav-link" href="#">FAQs</a></li>
-					<li class="nav-item"><a class="nav-link" href="/login">Login</a></li>
-					<li class="nav-item"><a class="nav-link" href="/register">Regístrate</a></li>
+					<li sec:authorize="isAnonymous()" class="nav-item"><a class="nav-link" href="/login">Login</a></li>
+					<li sec:authorize="isAnonymous()" class="nav-item"><a class="nav-link" href="/register">Regístrate</a></li>
+					<li sec:authorize="!isAnonymous()" class="nav-item"><a class="nav-link" href="/private/eventCreator">Creador</a></li>
+					<li sec:authorize="!isAnonymous()" class="nav-item"><a class="nav-link" th:href="@{/logout}">Cerrar sesión</a></li>
+					
 				</ul>
 			</div>
 		</nav>

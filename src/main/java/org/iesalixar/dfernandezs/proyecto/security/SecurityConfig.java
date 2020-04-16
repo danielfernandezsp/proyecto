@@ -25,20 +25,20 @@ public class SecurityConfig extends WebSecurityConfigurerAdapter{
             http
             	.authorizeRequests()
             	.antMatchers(resources).permitAll()
-            	.antMatchers("/", "/index", "/register", "/login").permitAll()
-//            	.antMatchers("/private/**").hasAnyRole( "ADMIN", "USER")
+            	.antMatchers("/", "/index", "/register", "/login", "/events").permitAll()
+            	.antMatchers("/private/**").hasAnyAuthority("USER", "ADMIN")
             	.anyRequest().authenticated()
             		.and()
             	.formLogin()
             		.loginPage("/login")
             		.permitAll()
-            		.defaultSuccessUrl("/private/eventCreator")
-            		.failureUrl("/login?error=true")
             		.usernameParameter("userLogin")
             		.passwordParameter("passLogin")
+            		.defaultSuccessUrl("/private/eventCreator", true)
+            		.failureUrl("/login?error=true")
             		.and()
             	.logout()
-            		.permitAll()
+            		.logoutUrl("/logout")
             		.logoutSuccessUrl("/login?logout");
     }
     

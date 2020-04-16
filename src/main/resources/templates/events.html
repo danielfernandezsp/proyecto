@@ -26,6 +26,8 @@
 	href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css">
 <link rel="shortcut icon" href="../images/icono.png" type="image/x-icon">
 
+    <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.3.1/jquery.min.js"></script>
+
 
 <link
 	href="https://fonts.googleapis.com/css?family=Gentium+Book+Basic&display=swap"
@@ -48,7 +50,7 @@
 
 			<div class="collapse navbar-collapse" id="navbarSupportedContent">
 				<ul class="navbar-nav m-auto d-flex justify-item-center">
-					<li class="nav-item"><a class="nav-link" href="/events">Eventos</a></li>
+					<li class="nav-item"><a class="nav-link" href="#">Eventos</a></li>
 					<li class="nav-item"><a class="nav-link" href="#">Foro</a></li>
 					<li class="nav-item"><a class="nav-link" href="#">Conócenos</a></li>
 				</ul>
@@ -60,8 +62,10 @@
 
 				<ul class="navbar-nav m-auto d-flex justify-item-center">
 					<li class="nav-item"><a class="nav-link" href="#">FAQs</a></li>
-					<li class="nav-item"><a class="nav-link" href="/login">Login</a></li>
-					<li class="nav-item"><a class="nav-link" href="#">Regístrate</a></li>
+					<li sec:authorize="isAnonymous()" class="nav-item"><a class="nav-link" href="/login">Login</a></li>
+					<li sec:authorize="isAnonymous()" class="nav-item"><a class="nav-link" href="/register">Regístrate</a></li>
+					<li sec:authorize="!isAnonymous()" class="nav-item"><a class="nav-link" href="/private/eventCreator">Creador</a></li>
+					<li sec:authorize="!isAnonymous()" class="nav-item"><a class="nav-link" th:href="@{/logout}">Cerrar sesión</a></li>
 				</ul>
 			</div>
 		</nav>
@@ -69,23 +73,19 @@
 
 	<!-- H1 de la página -->
 	<div class="container-fluid" id="description">
-		<h1 class="text-center animated bounce bounceInDown">¡REGÍSTRATE!</h1>
+		<h1 class="text-center animated bounce bounceInDown">¡EVENTOS!</h1>
 	</div>
 
-	<section class="container d-flex justify-content-center">
+	<section class="container-fluid">
 		<div class="col-6">
-			<form>
-				<div class="form-group">
-					<label><strong>Usuário</strong></label> <input type="text"
-						class="form-control" id="userLogin"
-						aria-describedby="emailHelp">
-				</div>
-				<div class="form-group">
-					<label><strong>Contraseña</strong></label> <input
-						type="password" class="form-control" id="passLogin">
-				</div>
-				<button type="submit" class="btn btn-primary">Submit</button>
-			</form>
+			<h2>Aqui van los eventos</h2>
+			
+			<ul th:each="event:${events}">
+				<li th:text="${event.name}"></li>
+				<li th:text="${event.description}"></li>
+				<li th:text="${event.date}"></li>
+			</ul>
+			
 		</div>
 	</section>
 

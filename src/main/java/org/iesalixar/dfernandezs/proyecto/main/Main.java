@@ -43,7 +43,7 @@ public class Main {
 		CommentRepository commentRepository = context.getBean(CommentRepository.class);
 		AuthorityRepository authorityRepository = context.getBean(AuthorityRepository.class);
 
-		// Creation Date
+		// Date creation
 		Date date = new Date();
 		
 		// Provinces
@@ -154,7 +154,6 @@ public class Main {
 		alcazar.setEnd_event(dateEnd);
 		alcazar.setStart_event(dateStart);
 		alcazar.setForum(foroAlcazar);
-		alcazar.setImage(img);
 		alcazar.setImage(img);
 		
 		// Comments
