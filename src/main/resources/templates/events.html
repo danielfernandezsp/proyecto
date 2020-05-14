@@ -19,6 +19,8 @@
 <link rel="stylesheet" href="../css/section.css">
 <link rel="stylesheet" href="../css/footer.css">
 <link rel="stylesheet" href="../css/body.css">
+<link rel="stylesheet" href="../css/forms.css">
+
 <script src="../js/javascript.js"></script>
 <link rel="stylesheet"
 	href="https://cdnjs.cloudflare.com/ajax/libs/animate.css/3.7.2/animate.min.css">
@@ -50,7 +52,7 @@
 
 			<div class="collapse navbar-collapse" id="navbarSupportedContent">
 				<ul class="navbar-nav m-auto d-flex justify-item-center">
-					<li class="nav-item"><a class="nav-link" href="#">Eventos</a></li>
+					<li class="nav-item"><a class="nav-link" href="/events">Eventos</a></li>
 					<li class="nav-item"><a class="nav-link" href="#">Foro</a></li>
 					<li class="nav-item"><a class="nav-link" href="#">Conócenos</a></li>
 				</ul>
@@ -64,7 +66,7 @@
 					<li class="nav-item"><a class="nav-link" href="#">FAQs</a></li>
 					<li sec:authorize="isAnonymous()" class="nav-item"><a class="nav-link" href="/login">Login</a></li>
 					<li sec:authorize="isAnonymous()" class="nav-item"><a class="nav-link" href="/register">Regístrate</a></li>
-					<li sec:authorize="!isAnonymous()" class="nav-item"><a class="nav-link" href="/private/eventCreator">Creador</a></li>
+					<li sec:authorize="!isAnonymous()" class="nav-item"><a class="nav-link" href="/private/home">Perfil</a></li>
 					<li sec:authorize="!isAnonymous()" class="nav-item"><a class="nav-link" th:href="@{/logout}">Cerrar sesión</a></li>
 				</ul>
 			</div>
@@ -76,16 +78,15 @@
 		<h1 class="text-center animated bounce bounceInDown">¡EVENTOS!</h1>
 	</div>
 
-	<section class="container-fluid">
-		<div class="col-6">
-			<h2>Aqui van los eventos</h2>
-			
-			<ul th:each="event:${events}">
-				<li th:text="${event.name}"></li>
+	<section class="container-fluid d-flex justify-content-center">
+		<div class="col-md-10 col-lg-7 col-12">
+			<ul id="event" th:each="event:${events}">
+				<li><h3 th:text="${event.name}"></h3></li>
 				<li th:text="${event.description}"></li>
-				<li th:text="${event.date}"></li>
+				<li><h5 th:text="${event.date}"></h5></li>
+				<li><a class="button button-block text-center" th:href="@{/event/(id=${event.event_id})}">Ver evento</a></li>
+				<hr>
 			</ul>
-			
 		</div>
 	</section>
 

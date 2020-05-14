@@ -1,5 +1,7 @@
 <!doctype html>
-<html lang="en"xmlns="http://www.w3.org/1999/xhtml" xmlns:th="http://www.thymeleaf.org" xmlns:sec="http://www.thymeleaf.org/extras/spring-security">
+<html lang="en" xmlns="http://www.w3.org/1999/xhtml" 
+			    xmlns:th="http://www.thymeleaf.org" 
+			    xmlns:sec="http://www.thymeleaf.org/extras/spring-security">
 
 
 <head>
@@ -19,6 +21,8 @@
 <link rel="stylesheet" href="../css/section.css">
 <link rel="stylesheet" href="../css/footer.css">
 <link rel="stylesheet" href="../css/body.css">
+<link rel="stylesheet" href="../css/forms.css">
+
 <script src="../js/javascript.js"></script>
 <link rel="stylesheet"
 	href="https://cdnjs.cloudflare.com/ajax/libs/animate.css/3.7.2/animate.min.css">
@@ -34,7 +38,7 @@
 	rel="stylesheet">
 </head>
 
-<body>
+<body onload="loginStorage()">
 	<header>
 		<nav class="navbar navbar-expand-lg navbar-light bg-info">
 			<a class="navbar-brand d-md-inline d-lg-none" href="/"> <img
@@ -62,7 +66,7 @@
 
 				<ul class="navbar-nav m-auto d-flex justify-item-center">
 					<li class="nav-item"><a class="nav-link" href="#">FAQs</a></li>
-					<li class="nav-item"><a class="nav-link" href="#">Login</a></li>
+					<li class="nav-item"><a class="nav-link" href="login/">Login</a></li>
 					<li class="nav-item"><a class="nav-link" href="/register">Regístrate</a></li>
 				</ul>
 			</div>
@@ -71,28 +75,49 @@
 
 	<!-- H1 de la página -->
 	<div class="container-fluid" id="description">
-		<h1 class="text-center animated bounce bounceInDown">¡LOGIN!</h1>
 	</div>
 
 	<section class="container d-flex justify-content-center">
-		<div class="col-12 col-md-6">
-		<div th:if="${param.error}" class="alert alert-danger" role="alert">
-			Compruebe sus credenciales.
-		</div>
-			<form th:action="@{/login}" method="post">
-				<div class="form-group">
-					<label><strong>Usuário</strong></label> <input type="text"
-						class="form-control" name="userLogin"
-						aria-describedby="emailHelp">
-				</div>
-				<div class="form-group">
-					<label><strong>Contraseña</strong></label> <input
-						type="password" class="form-control" name="passLogin">
-				</div>
-				<button type="submit" class="btn btn-primary">Submit</button>
-			</form>
-		</div>
+		<div class="form" onchange="login()">
+      
+      		<div class="tab-content">
+        		<div id="signup">   
+	          		<h1 class="animated bounce fadeIn">Inicia Sesión</h1>
+	          
+	          		<form th:action="@{/login}" method="POST">
+	
+	          
+	            	<div class="top-row">
+						<div class="field-wrap">
+		 					<p><input type="text" size="15" id="userLogin" name="userLogin" placeholder="Usuario"/></p>
+	            		</div>
+	            
+	            		<div class="field-wrap">
+		 					<p><input type="password" size="20" id="passLogin" name="passLogin" placeholder="Contraseña"/></p>
+	            		</div>
+	            	
+	          		</div>
+	          	
+	          		<div th:if="${param.error}" class="alert alert-danger animated bounce shake" role="alert">Compruebe sus credenciales.</div>
+	          	
+	         
+	         		 <input type="submit" class="button button-block" value="Enviar"/>
+	          
+	          		</form>
+
+        		</div>
+        
+        		<div id="login">   
+          
+        		</div>
+        
+      	</div><!-- tab-content -->
+      
+</div> <!-- /form -->
 	</section>
+	
+	
+	
 
 	<!-- Footer de la página -->
 	<footer class="jumbotron mt-5 mb-0">

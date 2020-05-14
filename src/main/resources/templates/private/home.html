@@ -17,12 +17,11 @@
 	<link rel="stylesheet" href="../css/footer.css">
 	<link rel="stylesheet" href="../css/body.css">
 	<link rel="stylesheet" href="../css/forms.css">
-	
 	<script src="../js/javascript.js"></script>
 	<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/animate.css/3.7.2/animate.min.css">
 	<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css">
 	<link rel="shortcut icon" href="../images/icono.png" type="image/x-icon">
-
+	<link href="//maxcdn.bootstrapcdn.com/font-awesome/4.7.0/css/font-awesome.min.css" rel="stylesheet">
 
 	<link href="https://fonts.googleapis.com/css?family=Gentium+Book+Basic&display=swap" rel="stylesheet">
 </head>
@@ -61,103 +60,59 @@
 
 	<!-- H1 y H2 de la página -->
 	<div class="container-fluid" id="description">
-		<h1 class="text-center animated bounce bounceInDown">¡Crea tus eventos!</h1>
+		<h1 class="text-center animated bounce bounceInDown">¡AUTENTICADO [[${#httpServletRequest.remoteUser.toUpperCase()}]]!</h1>
 	</div>
 
 	<section class="container-fluid">
 	
-			<div class="formEvent">
-      
-      		<div class="tab-content">
-        		<div id="signup">   
-          			<h1 class="animated bounce fadeIn">Nuevo evento</h1>
-          
-          			<form th:action="@{/addEvent}" th:object="${event}" method="POST">
-          
-		          		<div class="row">
-		          		
-		          			<!-- Nombre -->
-		            		<div class="col-12">
-			            		<p>Nombre</p>
-			              		<p><input type="text" size="20" name="name" placeholder="Nombre del evento"/></p>		              			
-			           		</div>	
-			           			           				            
-			          		<!-- Descripcion -->            		            	
-			            	<div class="col-12">
-			              		<p>Descripción</p>
-			              		<p><textarea cols="100" rows="3" name="description" placeholder="Descripción del evento"></textarea></p>		              			
-			           		</div>
-			           		
-		          			<!-- Lugar -->
-		            		<div class="col-12">
-			            		<p>Ubicación</p>
-			              		<p><input type="text" size="20" name="place" placeholder="URL de google maps donde se ubica el evento"/></p>		              			
-			           		</div>
-			           		
-		          			<!-- Sitio web -->
-		            		<div class="col-12">
-			            		<p>Sitio web</p>
-			              		<p><input type="text" size="20" name="webSite" placeholder="Web del anunciante"/></p>		              			
-			           		</div>
-			           	</div>	
-		           		
-		           		<!-- Categorias -->         		
-						<div class="col-12 col-md-6 d-inline-block" id="category">
-							<p>Categorías</p>
-							<div th:each="category:${categories}" class="boxCategory">
-								<input name="categories" th:text="${category.name}" th:value="${category.category_id}" type="checkbox"/>
-							</div>									
-		           		</div> 
-		           		
-		           		<div class="row position-top col-12 col-md-6 d-inline-block">		           			
-		           			
-		           			<!-- Capacidad --> 
-		           			<div class="col-12 col-md-9 d-inline-block my-2">
-								<p>Capacidad</p>
-		              			<p><input size="10" type="number" name="capacity" placeholder="Número de personas"/></p>		              			
-		           			</div> 		   
-		           			        			
-				          	<!-- Provincias --> 	           			
-							<div class="col-12 col-md-9 d-inline-block my-2">
-		            			<p>Provincia</p>
-		             			 <select id="provinces" name="province">
-		             			   <option value="0">Elige Provincia</option>
-		             			   <option class="province" th:value="${province.id}" th:each="province:${provinces}" th:text="${province.name}"></option>
-		             			 </select>
-		           			</div>	
-					          		
-					        <!-- Fecha inicio -->            				
-		  	           		<div class="col-12 col-md-8 d-inline-block my-4">
-								<p>Comienzo</p>
-		              			<p><input size="10" type="date" name="start_event"/></p>		              			
-		           			</div>
-		           			
-		           			<!-- Fecha fin --> 
-		           			<div class="col-12 col-md-8 d-inline-block my-2">
-								<p>Finalización</p>
-		              			<p><input size="10" type="date" name="end_event"/></p>		              			
-		           			</div>
-		         		</div>
-		           				
-		          		<div class="container">
-		          			<p><input type="file" accept="image/png" name="image"/>Foto de evento (no es obligatoria).</p>
-		          			
-		          		</div>
-          	
-          				<button type="submit" class="button button-block">Registrar evento</button>
-          
-          			</form>
-
-       			</div>
-        
-        		<div id="login">   
-          
-
-       			</div>
-        
-      		</div><!-- tab-content -->
-      
-		</div> <!-- /form -->
+	<div class="row">
+	
+		
+		
+		<div class="col-12 col-md-12 col-lg-3 bg-dark text-center">
+			<h3 class="d-inline-block">Perfíl</h3>
+			
+			<i data-toggle="collapse" id="up" data-target="#profileCard" class="d-lg-none fa fa-angle-double-down"></i>			
+			
+			<div id="profileCard" class="card collapse d-lg-block">
+				<img id="profileImage" class="col-12" th:src="@{'data:image/png;base64,'+${image}}"></img>
+				  <div class="card-body">
+					    <ul class="text-left">
+								
+							<li>
+								<p class="text-dark" th:text="${name + ' ' + lastName}"></p>
+							</li>
+										
+							<li>
+								<h4 class="text-dark">Usuario:</h4>
+								<p class="text-dark" th:text="${userName}"></p>
+							</li>
+										
+							<li>
+								<h4 class="text-dark">Rol:</h4>
+								<p class="text-dark" sec:authorize="hasAuthority('ADMIN')">ADMIN</p>
+								<p class="text-dark" sec:authorize="hasAuthority('USER')">USER</p>	
+							</li>
+					
+						</ul>
+				  </div>
+			</div>
+						
+		</div>
+		<div class="col-12 col-md-8 col-lg-6">
+			<h3 class="text-center">Mis eventos</h3>
+			<a class="button button-block text-center" href="/private/eventCreator">Crear nuevo evento</a>
+			<ul th:each="event:${eventList}">
+				<li><h2 th:text="${event.name}"></h2></li>
+				<li th:text="${event.description}"></li>
+				<li><h5 th:text="${event.date}"></h5></li>
+				<hr>
+			</ul>
+		</div>
+		<div class="col-12 col-md-4 col-lg-3 bg-dark">
+			<h3 class="text-center">Más cosas</h3>
+		</div>
+	</div>
 	</section>
 
 	<!-- Footer de la página -->
