@@ -1,64 +1,61 @@
 article {
-    height: 450px;
-    overflow-y: hidden;
+	height: 450px;
+	overflow-y: hidden;
 }
 
 article>div>img {
-    height: 100%;
-    object-fit: cover;
+	height: 100%;
+	object-fit: cover;
 }
 
 #description {
-    background-image: url("../images/ciudad.png");
-    background-repeat: no-repeat;
-    background-size: auto;
-    background-position-y: 90px;
-    background-position-x: center;
-    height: 250px;
+	background-image: url("../images/ciudad.png");
+	background-repeat: no-repeat;
+	background-size: auto;
+	background-position-y: 90px;
+	background-position-x: center;
+	height: 250px;
 }
 
 #info {
-    height: auto;
-    background-color: #FFAB60;
-    -webkit-box-shadow: 0px 3px 13px 0px rgba(0, 0, 0, 0.75);
-    -moz-box-shadow: 0px 3px 13px 0px rgba(0, 0, 0, 0.75);
-    box-shadow: 0px 3px 13px 0px rgba(0, 0, 0, 0.75);
-
+	height: auto;
+	background-color: #FFAB60;
+	-webkit-box-shadow: 0px 3px 13px 0px rgba(0, 0, 0, 0.75);
+	-moz-box-shadow: 0px 3px 13px 0px rgba(0, 0, 0, 0.75);
+	box-shadow: 0px 3px 13px 0px rgba(0, 0, 0, 0.75);
 }
 
 #info>h2 {
-    color: rgb(100, 24, 119);
+	color: rgb(100, 24, 119);
 }
 
 #info>div>div>h3>strong {
-    color: gold !important;
+	color: gold !important;
 }
 
-
 .carousel {
-    z-index: 0;
-    padding: 0;
+	z-index: 0;
+	padding: 0;
 }
 
 #info>div>#info-create {
-    border-left: solid;
-    border-right: solid;
+	border-left: solid;
+	border-right: solid;
 }
 
 #info-images>article {
-    background-color: rgba(54, 55, 86, 1);
-    -webkit-box-shadow: 0px 3px 13px 0px rgba(0, 0, 0, 0.75);
-    -moz-box-shadow: 0px 3px 13px 0px rgba(0, 0, 0, 0.75);
-    box-shadow: 0px 3px 13px 0px rgba(0, 0, 0, 0.75);
-
+	background-color: rgba(54, 55, 86, 1);
+	-webkit-box-shadow: 0px 3px 13px 0px rgba(0, 0, 0, 0.75);
+	-moz-box-shadow: 0px 3px 13px 0px rgba(0, 0, 0, 0.75);
+	box-shadow: 0px 3px 13px 0px rgba(0, 0, 0, 0.75);
 }
 
 #info-images>article {
-    height: auto !important;
+	height: auto !important;
 }
 
 #info-images>article>#info-image {
-    padding: 0;
+	padding: 0;
 }
 
 #info-images>article>div>h2 {
@@ -66,70 +63,169 @@ article>div>img {
 }
 
 @media only screen and (max-width: 991px) {
-    #info>div>#info-create {
-        border-left: none;
-        border-right: none;
-    }
+	#info>div>#info-create {
+		border-left: none;
+		border-right: none;
+	}
 }
 
-
 #info-event {
-    background: #141E30;
-    /* fallback for old browsers */
-    background: -webkit-linear-gradient(to right, rgba(36, 59, 85, 0.8), rgba(20, 30, 48, 0.8)), url("../images/alcazar.jpg");
-    /* Chrome 10-25, Safari 5.1-6 */
-    background: linear-gradient(to right, rgba(36, 59, 85, 0.8), rgba(20, 30, 48, 0.8)), url("../)images/alcazar.jpg");
-    /* W3C, IE 10+/ Edge, Firefox 16+, Chrome 26+, Opera 12+, Safari 7+ */
-    background-size: cover;
+	background: #141E30;
+	/* fallback for old browsers */
+	background: -webkit-linear-gradient(to right, rgba(36, 59, 85, 0.8),
+		rgba(20, 30, 48, 0.8)), url("../images/alcazar.jpg");
+	/* Chrome 10-25, Safari 5.1-6 */
+	background: linear-gradient(to right, rgba(36, 59, 85, 0.8),
+		rgba(20, 30, 48, 0.8)), url("../)images/alcazar.jpg");
+	/* W3C, IE 10+/ Edge, Firefox 16+, Chrome 26+, Opera 12+, Safari 7+ */
+	background-size: cover;
 }
 
 #info-create {
-    background: #141E30;
-    /* fallback for old browsers */
-    background: -webkit-linear-gradient(to right, rgba(36, 59, 85, 0.8), rgba(20, 30, 48, 0.8)), url("../images/antique.jpg");
-    /* Chrome 10-25, Safari 5.1-6 */
-    background: linear-gradient(to right, rgba(36, 59, 85, 0.8), rgba(20, 30, 48, 0.8)), url("../images/antique.jpg");
-    /* W3C, IE 10+/ Edge, Firefox 16+, Chrome 26+, Opera 12+, Safari 7+ */
-    background-size: cover;
+	background: #141E30;
+	/* fallback for old browsers */
+	background: -webkit-linear-gradient(to right, rgba(36, 59, 85, 0.8),
+		rgba(20, 30, 48, 0.8)), url("../images/antique.jpg");
+	/* Chrome 10-25, Safari 5.1-6 */
+	background: linear-gradient(to right, rgba(36, 59, 85, 0.8),
+		rgba(20, 30, 48, 0.8)), url("../images/antique.jpg");
+	/* W3C, IE 10+/ Edge, Firefox 16+, Chrome 26+, Opera 12+, Safari 7+ */
+	background-size: cover;
 }
 
 #info-share {
-    background: #141E30;
-    /* fallback for old browsers */
-    background: -webkit-linear-gradient(to right, rgba(36, 59, 85, 0.8), rgba(20, 30, 48, 0.8)), url("../images/catedral.jpg");
-    /* Chrome 10-25, Safari 5.1-6 */
-    background: linear-gradient(to right, rgba(36, 59, 85, 0.8), rgba(20, 30, 48, 0.8)), url("../images/catedral.jpg");
-    /* W3C, IE 10+/ Edge, Firefox 16+, Chrome 26+, Opera 12+, Safari 7+ */
-    background-size: cover;
+	background: #141E30;
+	/* fallback for old browsers */
+	background: -webkit-linear-gradient(to right, rgba(36, 59, 85, 0.8),
+		rgba(20, 30, 48, 0.8)), url("../images/catedral.jpg");
+	/* Chrome 10-25, Safari 5.1-6 */
+	background: linear-gradient(to right, rgba(36, 59, 85, 0.8),
+		rgba(20, 30, 48, 0.8)), url("../images/catedral.jpg");
+	/* W3C, IE 10+/ Edge, Firefox 16+, Chrome 26+, Opera 12+, Safari 7+ */
+	background-size: cover;
+}
+
+.options {
+	margin-right: 0px !important;
+	margin-left: 0px !important;
 }
 
 #info>.row>div>img {
-    margin: 10px;
-    bottom: 0;
+	margin: 10px;
+	bottom: 0;
 }
 
 #info>.row>div {
-    margin-bottom: 0 !important;
+	margin-bottom: 0 !important;
 }
 
 hr {
-    border: 0;
-    height: 2px;
-    text-align: center;
-    background: linear-gradient(to left, rgba(255, 255, 255, 0), #fff, rgba(255, 255, 255, 0));
+	border: 0;
+	height: 2px;
+	text-align: center;
+	background: linear-gradient(to left, rgba(255, 255, 255, 0), #fff,
+		rgba(255, 255, 255, 0));
 }
 
-.images-exp{
-    padding: 0 !important;
+.images-exp {
+	padding: 0 !important;
 }
 
-article>div>.row{
-  opacity: 1;
-  transition: .5s ease;
-  background-color: grey;
+article>div>.row {
+	opacity: 1;
+	transition: .5s ease;
+	background-color: grey;
+}
+
+.images-exp:hover {
+	opacity: 0.7;
+}
+
+#profileImage {
+	margin-left: auto;
+	margin-right: auto;
+	width: 200px;
+	object-fit: fill;
+}
+
+#event {
+   background-color: rgba(1, 1, 1, 0.6); /* Color */
+	background-image:url("https://besthqwallpapers.com/Uploads/28-3-2019/85199/thumb2-rhombuses-patterns-4k-vintage-backgrounds-vintage-upholstery-rhombuses.jpg");
+	margin-bottom: 5px;
+	   background-blend-mode: multiply; /* Efecto */
+	
 }
 
 
-.images-exp:hover{
-    opacity: 0.7;
+#eventImagen>img {
+	width: auto !important;
+	border: white solid 1px;
+	border-radius: 5px;
+	padding: 0 !important;
+	background-color: white;
+	max-height: 250px;
+}
+
+#eventDescriptions {
+	background-color: rgba(1, 1, 1, 0.8);
+}
+
+#imageEvent {
+	border: white solid 1px;
+	border-radius: 5px;
+	padding: 0 !important;
+	background-color: white;
+}
+
+#imageComment {
+	padding: 0;
+	width : 50px;
+	height: 50px;
+}
+
+#imageUserComment {
+	object-fit: scale-down; 
+	width : 50px;
+	height: 50px;
+	background-color: white;
+}
+
+td>form>input {
+	width: auto;
+}
+
+.adminIcon {
+	padding-bottom: 5px !important;
+	padding-top: 5px !important;
+	margin: 0 !important;
+}
+
+section {
+	padding: 5px !important;
+	background-image:
+		url("https://puntodefugabogota.files.wordpress.com/2019/01/fondo-negro.jpg");
+}
+
+#sectionEventCreator {
+	background-color: transparent !important;
+}
+
+iframe {
+	padding: 0 !important;
+}
+
+#preview {
+	width: 50%;
+	height: 50%;
+}
+
+li {
+	word-wrap: break-word;
+}
+
+.fa-arrow-circle-up{
+	position: fixed;
+	right: 5px;
+	bottom: 5px;
+	font-size: 30px !important;
 }

@@ -36,7 +36,7 @@
 	rel="stylesheet">
 </head>
 
-<body>
+<body onscroll="arrowUp()">
 	<header>
 		<nav class="navbar navbar-expand-lg navbar-light bg-info">
 			<a class="navbar-brand d-md-inline d-lg-none" href="/"> <img
@@ -53,17 +53,15 @@
 			<div class="collapse navbar-collapse" id="navbarSupportedContent">
 				<ul class="navbar-nav m-auto d-flex justify-item-center">
 					<li class="nav-item"><a class="nav-link" href="/events">Eventos</a></li>
-					<li class="nav-item"><a class="nav-link" href="#">Foro</a></li>
-					<li class="nav-item"><a class="nav-link" href="#">Conócenos</a></li>
+					<li class="nav-item"><a class="nav-link" href="/about">Conócenos</a></li>
 				</ul>
 
-				<a class="navbar-brand d-none d-lg-inline  animated bounce fadeIn"
+				<a class="navbar-brand d-none d-lg-inline animated bounce fadeIn"
 					href="/"> <img src="../images/logo.png" height="60"
 					class="d-inline-block align-top" alt="">
 				</a>
 
 				<ul class="navbar-nav m-auto d-flex justify-item-center">
-					<li class="nav-item"><a class="nav-link" href="#">FAQs</a></li>
 					<li sec:authorize="isAnonymous()" class="nav-item"><a class="nav-link" href="/login">Login</a></li>
 					<li sec:authorize="isAnonymous()" class="nav-item"><a class="nav-link" href="/register">Regístrate</a></li>
 					<li sec:authorize="!isAnonymous()" class="nav-item"><a class="nav-link" href="/private/home">Perfil</a></li>
@@ -75,20 +73,68 @@
 
 	<!-- H1 de la página -->
 	<div class="container-fluid" id="description">
-		<h1 class="text-center animated bounce bounceInDown">¡EVENTOS!</h1>
-	</div>
+		<h1 id="title" class="text-center animated bounce bounceInDown">¡EVENTOS!</h1>
+	</div> 
 
-	<section class="container-fluid d-flex justify-content-center">
+	<section class="container-fluid d-flex justify-content-center">	
 		<div class="col-md-10 col-lg-7 col-12">
-			<ul id="event" th:each="event:${events}">
-				<li><h3 th:text="${event.name}"></h3></li>
-				<li th:text="${event.description}"></li>
-				<li><h5 th:text="${event.date}"></h5></li>
-				<li><a class="button button-block text-center" th:href="@{/event/(id=${event.event_id})}">Ver evento</a></li>
-				<hr>
-			</ul>
+			<div class="bg-dark">
+			
+			
+			
+				<form th:action="@{/eventFilter}" method="POST" class="p-3">
+					<div class="row">
+						<div class="col-12 col-md-6 mb-4">
+							<p>Categorías</p>
+							<div class="row">
+								<div th:each="category:${categories}" class="boxCategory col-6">
+								<input name="categories" th:text="${category.name}" th:value="${category.category_id}" type="radio"/>
+							</div>
+								<input name="categories" class="d-none" checked="checked" value="0" type="radio"/>
+							</div>
+
+						</div>
+						<div class="col-12 col-md-6 md-text-center">
+							<p>Provincia</p>
+			             	<select id="provinces" name="province">
+			             		<option value="0">Todas las provincias</option>
+			             		<option class="province" th:value="${province.id}" th:each="province:${provinces}" th:text="${province.name}"></option>
+			             	</select>
+						</div>
+						<div class="container d-flex justify-content-end">
+							<button type="submit" class="btn btn-lg btn-success">Filtrar</button>
+						</div>
+					</div>
+
+				</form>
+				
+				
+				
+			</div>
+			<div class="p-2" id="event" th:each="event:${events}">
+				<div class="row">
+					<div id="eventImagen" class="col-12 col-md-3 text-center">
+						<img th:src="${(event.image != null && !#strings.isEmpty(event.image)) ? event.image : 'https://www.barcelonabeta.org/sites/default/files/2018-04/default-image_0.png'}" class="col-12"></img>
+					</div>
+					<div id="eventDescriptions" class="col-12 col-md-9">
+						<h3 th:text="${event.name}"></h3>
+						<p th:text="${event.description}"></p>
+						<h5 th:text="${event.province.name}"></h5>
+						<h5 th:text="${event.date}"></h5>
+						<a class="button button-block text-center" target="blank" th:href="@{/event/(id=${event.event_id})}">Ver evento</a>
+						<hr>
+					</div>
+				</div>
+				
+			</div>
+		</div>
+		
+		<div>
+			
 		</div>
 	</section>
+		<a href="#title"><i class="fa fa-arrow-circle-up d-none animated bounce fadeIn"></i></a>
+		<a class="arrowUpLink d-none"><i class="fa fa-arrow-circle-up d-none animated bounce fadeOut"></i></a>
 
 	<!-- Footer de la página -->
 	<footer class="jumbotron mt-5 mb-0">

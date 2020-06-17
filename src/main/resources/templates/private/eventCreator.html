@@ -27,7 +27,7 @@
 	<link href="https://fonts.googleapis.com/css?family=Gentium+Book+Basic&display=swap" rel="stylesheet">
 </head>
 
-<body>
+<body onchange="validateEvent()">
 	<header>
 		<nav class="navbar navbar-expand-lg navbar-light bg-info">
 			<a class="navbar-brand d-md-inline d-lg-none" href="/"> <img src="../images/logo.png" height="60"
@@ -42,8 +42,7 @@
 			<div class="collapse navbar-collapse" id="navbarSupportedContent">
 				<ul class="navbar-nav m-auto d-flex justify-item-center">
 					<li class="nav-item"><a class="nav-link" href="/events">Eventos</a></li>
-					<li class="nav-item"><a class="nav-link" href="#">Foro</a></li>
-					<li class="nav-item"><a class="nav-link" href="#">Conócenos</a></li>
+					<li class="nav-item"><a class="nav-link" href="/about">Conócenos</a></li>
 				</ul>
 
 				<a class="navbar-brand d-none d-lg-inline  animated bounce fadeIn" href="/"> <img src="../images/logo.png" height="60"
@@ -51,7 +50,6 @@
 				</a>
 
 				<ul class="navbar-nav m-auto d-flex justify-item-center">
-					<li class="nav-item"><a class="nav-link" href="#">FAQs</a></li>
 					<li class="nav-item"><a class="nav-link" th:if="${session != null}" href="/private/home">Perfil</a></li>
 					<li class="nav-item"><a class="nav-link" th:href="@{/logout}">Cerrar sesión</a></li>
 				</ul>
@@ -64,40 +62,44 @@
 		<h1 class="text-center animated bounce bounceInDown">¡Crea tus eventos!</h1>
 	</div>
 
-	<section class="container-fluid">
+	<section id="sectionEventCreator" class="container-fluid">
 	
 			<div class="formEvent">
       
       		<div class="tab-content">
         		<div id="signup">   
           			<h1 class="animated bounce fadeIn">Nuevo evento</h1>
-          
-          			<form th:action="@{/addEvent}" th:object="${event}" method="POST">
+          			<h5 class="text-center">Los campos con (*) son obligatórios.</h5>
+          			<form th:action="@{/addEvent}" th:object="${event}" method="POST" onkeyup="validateEvent()">
           
 		          		<div class="row">
 		          		
 		          			<!-- Nombre -->
 		            		<div class="col-12">
-			            		<p>Nombre</p>
-			              		<p><input type="text" size="20" name="name" placeholder="Nombre del evento"/></p>		              			
+			            		<p>Nombre*</p>
+			              		<p><input type="text" id="eventName" size="20" name="name" placeholder="Nombre del evento"/></p>		              			
+			           			<span id="eventNameError" class="d-none text-danger">Entre 4-50 caracteres.</span>
 			           		</div>	
 			           			           				            
 			          		<!-- Descripcion -->            		            	
 			            	<div class="col-12">
-			              		<p>Descripción</p>
-			              		<p><textarea cols="100" rows="3" name="description" placeholder="Descripción del evento"></textarea></p>		              			
+			              		<p>Descripción*</p>
+			              		<p><textarea cols="100" id="eventDescription" rows="3" name="description" placeholder="Descripción del evento"></textarea></p>		              			
+			           			<span id="eventDescriptionError" class="d-none text-danger">Entre 10-500 caracteres.</span>
 			           		</div>
 			           		
 		          			<!-- Lugar -->
 		            		<div class="col-12">
-			            		<p>Ubicación</p>
-			              		<p><input type="text" size="20" name="place" placeholder="URL de google maps donde se ubica el evento"/></p>		              			
+			            		<p>Ubicación*</p>
+			              		<p><input type="text" id="eventPlace" size="20" name="place" placeholder="URL de google maps donde se ubica el evento"/></p>		              			
+			           			<span id="eventPlaceError" class="d-none text-danger">Entre 1-700 caracteres.</span>
+			           			<span class="text-warning">Lugar en Google Maps > Compartir > Insertar un mapa > COPIAR HTML</span>
 			           		</div>
 			           		
 		          			<!-- Sitio web -->
 		            		<div class="col-12">
 			            		<p>Sitio web</p>
-			              		<p><input type="text" size="20" name="webSite" placeholder="Web del anunciante"/></p>		              			
+			              		<p><input type="url" size="20" name="webSite" placeholder="http://www.tuWeb.com"/></p>		              			
 			           		</div>
 			           	</div>	
 		           		
@@ -114,22 +116,24 @@
 		           			<!-- Capacidad --> 
 		           			<div class="col-12 col-md-9 d-inline-block my-2">
 								<p>Capacidad</p>
-		              			<p><input size="10" type="number" name="capacity" placeholder="Número de personas"/></p>		              			
+		              			<p><input id="eventCapacity" onkeyup="capacityNum()" size="10" type="number" name="capacity" min="0" max="99999999999‬" value="0" placeholder="Número de personas"/></p>		              			
 		           			</div> 		   
 		           			        			
 				          	<!-- Provincias --> 	           			
 							<div class="col-12 col-md-9 d-inline-block my-2">
-		            			<p>Provincia</p>
+		            			<p>Provincia*</p>
 		             			 <select id="provinces" name="province">
 		             			   <option value="0">Elige Provincia</option>
 		             			   <option class="province" th:value="${province.id}" th:each="province:${provinces}" th:text="${province.name}"></option>
 		             			 </select>
+		             			 <span id="eventProvinceError" class="d-block text-danger">Obligatorio.</span>
 		           			</div>	
 					          		
 					        <!-- Fecha inicio -->            				
 		  	           		<div class="col-12 col-md-8 d-inline-block my-4">
-								<p>Comienzo</p>
-		              			<p><input size="10" type="date" name="start_event"/></p>		              			
+								<p>Comienzo*</p>
+		              			<p><input id="eventStart" size="10" type="date" name="start_event"/></p>
+		              			<span id="eventStartError" class="text-danger">Obligatorio.</span>            					              					           			
 		           			</div>
 		           			
 		           			<!-- Fecha fin --> 
@@ -139,12 +143,13 @@
 		           			</div>
 		         		</div>
 		           				
-		          		<div class="container">
-		          			<p><input type="file" accept="image/png" name="image"/>Foto de evento (no es obligatoria).</p>
-		          			
+		          		<div class="top-row">
+		          			<p><input onchange="previewFile()" type="file" id="imageFile" name="imageFile" accept="image/png" placeholder="Foto"/>Foto de evento (no es obligatoria).</p>
+		          			<img id="preview" src="" alt="Image preview...">			      
 		          		</div>
+		          		<input class="d-none" name="image" type="text" id="image"/>
           	
-          				<button type="submit" class="button button-block">Registrar evento</button>
+          				<button id="btnSave" disabled type="submit" class="button button-block btn-warning">Registrar evento</button>
           
           			</form>
 

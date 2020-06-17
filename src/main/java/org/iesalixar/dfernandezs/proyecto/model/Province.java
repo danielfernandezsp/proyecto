@@ -8,6 +8,11 @@ import javax.persistence.*;
 @Entity
 public class Province implements Serializable {
 
+	/**
+	 * 
+	 */
+	private static final long serialVersionUID = 1L;
+
 	@Id
 	@GeneratedValue(strategy=GenerationType.IDENTITY)
 	private long id;
@@ -20,6 +25,10 @@ public class Province implements Serializable {
 	
 	public Province () {
 		
+	}
+	
+	public long getId() {
+		return id;
 	}
 
 	public String getName() {

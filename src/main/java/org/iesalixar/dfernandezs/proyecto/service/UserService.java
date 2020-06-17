@@ -1,23 +1,18 @@
 package org.iesalixar.dfernandezs.proyecto.service;
 
-import java.util.ArrayList;
-import java.util.Arrays;
 import java.util.HashSet;
-import java.util.List;
 import java.util.Set;
 
+import org.iesalixar.dfernandezs.proyecto.model.Authority;
 import org.iesalixar.dfernandezs.proyecto.model.User;
 import org.iesalixar.dfernandezs.proyecto.repository.UserRepository;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.security.core.GrantedAuthority;
 import org.springframework.security.core.authority.SimpleGrantedAuthority;
-import org.springframework.security.core.userdetails.User.UserBuilder;
 import org.springframework.security.core.userdetails.UserDetails;
 import org.springframework.security.core.userdetails.UserDetailsService;
 import org.springframework.security.core.userdetails.UsernameNotFoundException;
 import org.springframework.stereotype.Service;
-
-import org.iesalixar.dfernandezs.proyecto.model.Authority;
 
 
 @Service
@@ -42,4 +37,19 @@ public class UserService implements UserDetailsService{
         return new org.springframework.security.core.userdetails.User(user.getUsername(), user.getPassword(), grantedAuthorities);
 
 	}
+	
+	public User addUser(User user) {
+		return repo.save(user);	
+	}
+	
+	public User updateUser(User fromUser) {
+		User toUser = repo.findByUsername(fromUser.getUsername());
+		toUser.setName(fromUser.getName());
+		toUser.setLastName(fromUser.getLastName());
+		toUser.setImage(fromUser.getImage());
+		toUser.setUsername(fromUser.getUsername());
+		return repo.save(toUser);
+		
+	}
+	
 }

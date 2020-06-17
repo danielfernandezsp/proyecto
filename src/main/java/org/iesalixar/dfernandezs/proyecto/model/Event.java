@@ -1,22 +1,45 @@
 package org.iesalixar.dfernandezs.proyecto.model;
 
 import java.io.Serializable;
-import java.time.LocalDateTime;
 import java.util.Date;
 import java.util.HashSet;
 import java.util.Set;
 
-import javax.persistence.*;
+import javax.persistence.CascadeType;
+import javax.persistence.Column;
+import javax.persistence.Entity;
+import javax.persistence.GeneratedValue;
+import javax.persistence.GenerationType;
+import javax.persistence.Id;
+import javax.persistence.JoinColumn;
+import javax.persistence.JoinTable;
+import javax.persistence.Lob;
+import javax.persistence.ManyToMany;
+import javax.persistence.ManyToOne;
+import javax.persistence.OneToOne;
+import javax.persistence.Temporal;
+import javax.persistence.TemporalType;
+
+import org.springframework.format.annotation.DateTimeFormat;
+import org.springframework.format.annotation.DateTimeFormat.ISO;
 
 
 @Entity
 public class Event implements Serializable {
 	
+	/**
+	 * 
+	 */
+	private static final long serialVersionUID = 1L;
+
 	@Id
 	@GeneratedValue(strategy=GenerationType.IDENTITY)
 	private long event_id;
 	
-	@Column(unique = true, length = 30, nullable = false)
+	@Column(nullable = false)
+	private boolean allow = false;
+	
+	@Column(unique = true, length = 50, nullable = false)
 	private String name = "";
 	
 	@Column(length = 500, nullable = false)
@@ -26,13 +49,17 @@ public class Event implements Serializable {
 	private int capacity = 0;
 	
 	@Column(nullable = false)
-	private Date date = null;
+	private Date date;
 	
+	@Temporal(TemporalType.DATE)
+	@DateTimeFormat(iso = ISO.DATE)
 	@Column(nullable = false)
-	private LocalDateTime start_event = null;
+	private Date start_event;
 	
+	@Temporal(TemporalType.DATE)
+	@DateTimeFormat(iso = ISO.DATE)
 	@Column(nullable = true)
-	private LocalDateTime end_event = null;
+	private Date end_event;
 	
 	@ManyToOne
     @JoinColumn(name = "FK_PROVINCE", nullable = false, updatable = false)
@@ -52,7 +79,7 @@ public class Event implements Serializable {
     @OneToOne(mappedBy = "event", cascade = CascadeType.ALL)
 	private Forum forum = null;
 
-	@Column(nullable = false)
+	@Column(length = 700, nullable = false)
 	private String place = "";
 	
 	@Column(nullable = true)
@@ -60,14 +87,14 @@ public class Event implements Serializable {
 		
 	@Lob
 	@Column (name = "image")
-	private byte[] image;
+	private String image;
 	
 	public Event () {
 		
 	}
 
-	public Event(String name, String description, int capacity, Date date, LocalDateTime start_event, LocalDateTime end_event, Province province,
-			Set<Category> categories, User user, String place, String webSite, byte[] image) {
+	public Event(String name, String description, int capacity, Date date, Date start_event, Date end_event, Province province,
+			Set<Category> categories, User user, String place, String webSite, String image) {
 		super();
 		this.name = name;
 		this.description = description;
@@ -82,6 +109,20 @@ public class Event implements Serializable {
 		this.place = place;
 		this.webSite = webSite;
 		this.image = image;
+	}
+
+	
+	
+	public long getEvent_id() {
+		return event_id;
+	}
+
+	public boolean getAllow() {
+		return allow;
+	}
+
+	public void setAllow(boolean allow) {
+		this.allow = allow;
 	}
 
 	public String getName() {
@@ -116,19 +157,19 @@ public class Event implements Serializable {
 		this.date = date;
 	}
 
-	public LocalDateTime getStart_event() {
+	public Date getStart_event() {
 		return start_event;
 	}
 
-	public void setStart_event(LocalDateTime start_event) {
+	public void setStart_event(Date start_event) {
 		this.start_event = start_event;
 	}
 
-	public LocalDateTime getEnd_event() {
+	public Date getEnd_event() {
 		return end_event;
 	}
 
-	public void setEnd_event(LocalDateTime end_event) {
+	public void setEnd_event(Date end_event) {
 		this.end_event = end_event;
 	}
 
@@ -180,11 +221,11 @@ public class Event implements Serializable {
 		this.webSite = webSite;
 	}
 
-	public byte[] getImage() {
+	public String getImage() {
 		return image;
 	}
 
-	public void setImage(byte[] image) {
+	public void setImage(String image) {
 		this.image = image;
 	}
 

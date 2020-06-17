@@ -19,6 +19,8 @@
 <link rel="stylesheet" href="../css/section.css">
 <link rel="stylesheet" href="../css/footer.css">
 <link rel="stylesheet" href="../css/body.css">
+<link rel="stylesheet" href="../css/forms.css">
+
 <script src="../js/javascript.js"></script>
 <link rel="stylesheet"
 	href="https://cdnjs.cloudflare.com/ajax/libs/animate.css/3.7.2/animate.min.css">
@@ -51,8 +53,7 @@
 			<div class="collapse navbar-collapse" id="navbarSupportedContent">
 				<ul class="navbar-nav m-auto d-flex justify-item-center">
 					<li class="nav-item"><a class="nav-link" href="/events">Eventos</a></li>
-					<li class="nav-item"><a class="nav-link" href="#">Foro</a></li>
-					<li class="nav-item"><a class="nav-link" href="#">Conócenos</a></li>
+					<li class="nav-item"><a class="nav-link" href="/about">Conócenos</a></li>
 				</ul>
 
 				<a class="navbar-brand d-none d-lg-inline  animated bounce fadeIn"
@@ -61,7 +62,6 @@
 				</a>
 
 				<ul class="navbar-nav m-auto d-flex justify-item-center">
-					<li class="nav-item"><a class="nav-link" href="#">FAQs</a></li>
 					<li sec:authorize="isAnonymous()" class="nav-item"><a class="nav-link" href="/login">Login</a></li>
 					<li sec:authorize="isAnonymous()" class="nav-item"><a class="nav-link" href="/register">Regístrate</a></li>
 					<li sec:authorize="!isAnonymous()" class="nav-item"><a class="nav-link" href="/private/home">Perfil</a></li>
@@ -78,38 +78,88 @@
 
 	<section class="container-fluid">
 		<div class="col-12">
-			
-			<ul>
-				<li>
-					<h3>Descripcción</h3>
-					<p th:text="${event.description}"></p>
-				</li>
-				<li th:if="${event.capacity} >0">
-					<h3>Capacidad</h3>
-					<p th:text="${event.capacity}"></p>
-				</li>
-				<li>
-					<h3>Fecha de inicio</h3>
-					<p th:text="${event.start_event}"></p>
-				</li>
-				<li th:if="${event.end_event} != null">
-					<h3>Fecha de finalización</h3>
-					<p th:text="${event.end_event}"></p>
-				</li>
-				<li>
-					<h3>Mapa</h3>
+			<div class="row">	
+				<ul class="col-12 col-md-6">
+					<li class="text-center">	
+						<img th:src="${(event.image != null && !#strings.isEmpty(event.image)) ? event.image : ''}" id="imageEvent" class="w-50 col-12"></img>
+					</li>
+					<li>
+						<h3>Descripción</h3>
+						<p th:text="${event.description}"></p>
+					</li>
+					<li th:if="${event.capacity} > 0">
+						<h3>Capacidad</h3>
+						<p th:text="${event.capacity}"></p>
+					</li>
+					<li th:if="${not #lists.isEmpty(event.categories)}">
+						<h3>Categorías</h3>
+						<div th:each="category : ${event.categories}">
+							<p th:text="${category.name}"></p>
+						</div>
+					</li>
+					<li>
+						<h3>Provincia</h3>
+						<p th:text="${event.province.name}"></p>
+					</li>
+					<li>
+						<h3>Fecha de inicio</h3>
+						<p th:text="${event.start_event}"></p>
+					</li>
+					<li th:if="${event.end_event} != null">
+						<h3>Fecha de finalización</h3>
+						<p th:text="${event.end_event}"></p>
+					</li>
+					<li>
+						<h3>Creador</h3>
+						<p th:text="${event.user.name} + ' ' + ${event.user.lastName}"></p>
+					</li>
+					<li th:if="${event.webSite} != ''">
+						<h3>Contacto/información</h3>
+						<a class="btn btn-primary" th:href="${event.webSite}">Enlace de contacto</a>
+					</li>
+				</ul>
+				<div id="map" class="col-12 col-md-6">
 					<p th:utext="${event.place}"></p>
-				</li>
-				<li th:if="${event.webSite} != ''">
-					<h3>Contacto/información</h3>
-					<a th:href="${event.webSite}">Enlace de contacto</a>
-				</li>
-			</ul>
-			
-			<h4>¿Te gusta este evento? <i class="fa fa-heart"></i></h4>
+					
+					<form class="mb-2" th:action="@{/addComment}" sec:authorize="!isAnonymous()" onkeyup="validateComment()" method="POST">
+						<p><textarea class="bg-white text-dark" id="comment" cols="100" rows="3" name="text" placeholder="Deja aquí tu comentario..."></textarea></p>
+						<span id="commentError" class="d-none text-danger">Entre 1-255 caracteres.</span>
+						<p><input class="d-none" type="number" name="forum" th:value="${event.forum.id}"></p>
+						<p><input class="d-none" type="text" name="event" th:value="${event.event_id}"></p>
+						<input type="submit" disabled id="btnComment" class="button button-block btn-warning" value="enviar">
+					</form>
+					<div>
+					<div class="row" th:each="comment:${comments}">
+					
+						<div id="imageComment" class="col-1">
+							<img class="rounded" alt="" id="imageUserComment" th:src="${(comment.user.image != null && !#strings.isEmpty(comment.user.image)) ? comment.user.image : 'https://www.m-x.com.mx/assets/default-user-avatar.png'}">
+						</div>
+						<div class="col-11 p-3">
+							<p class="ml-2" th:text="${(comment.user.name)}"></p>			
+							<h4 th:text="${comment.text}"></h4>
+							<span th:text="${comment.date}"></span>
+							
+							<form class="d-inline" method="post" th:action="@{/comment/remove}">
+								<input hidden="true" name="id" th:value="${comment.id}" />		
+								<input class="d-none" type="text" name="event" th:value="${event.event_id}">						
+								  <button type="submit" class="btn text-danger btn-sm" th:if="${comment.user.username} == ${#httpServletRequest.remoteUser} or ${#httpServletRequest.remoteUser} == dani">Eliminar</button>
+							</form>
+							
+							<hr>
+						</div>
+					</div>					
+					</div>
+				</div>
+			</div>
+						
+			<div class="col-12 col-md-6 row bg-secondary m-0">				
+				
+			</div>
 			
 		</div>
 	</section>
+	
+
 
 	<!-- Footer de la página -->
 	<footer class="jumbotron mt-5 mb-0">

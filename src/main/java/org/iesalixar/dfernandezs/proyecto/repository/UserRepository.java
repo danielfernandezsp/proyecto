@@ -10,5 +10,8 @@ public interface UserRepository extends CrudRepository<User, Long>, JpaRepositor
 	
 //	User findByUser (String user);
     User findByUsername(String username);
-
+    
+    User findById(long id);
+    
+    User deleteById(long id);
 }

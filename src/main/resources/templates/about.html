@@ -1,7 +1,5 @@
 <!doctype html>
-<html lang="en" xmlns="http://www.w3.org/1999/xhtml" 
-			    xmlns:th="http://www.thymeleaf.org" 
-			    xmlns:sec="http://www.thymeleaf.org/extras/spring-security">
+<html lang="en" xmlns="http://www.w3.org/1999/xhtml" xmlns:th="http://www.thymeleaf.org" xmlns:sec="http://www.thymeleaf.org/extras/spring-security">
 
 
 <head>
@@ -38,7 +36,7 @@
 	rel="stylesheet">
 </head>
 
-<body onload="loginStorage()">
+<body>
 	<header>
 		<nav class="navbar navbar-expand-lg navbar-light bg-info">
 			<a class="navbar-brand d-md-inline d-lg-none" href="/"> <img
@@ -64,8 +62,10 @@
 				</a>
 
 				<ul class="navbar-nav m-auto d-flex justify-item-center">
-					<li class="nav-item"><a class="nav-link" href="login/">Login</a></li>
-					<li class="nav-item"><a class="nav-link" href="/register">Regístrate</a></li>
+					<li sec:authorize="isAnonymous()" class="nav-item"><a class="nav-link" href="/login">Login</a></li>
+					<li sec:authorize="isAnonymous()" class="nav-item"><a class="nav-link" href="/register">Regístrate</a></li>
+					<li sec:authorize="!isAnonymous()" class="nav-item"><a class="nav-link" href="/private/home">Perfil</a></li>
+					<li sec:authorize="!isAnonymous()" class="nav-item"><a class="nav-link" th:href="@{/logout}">Cerrar sesión</a></li>
 				</ul>
 			</div>
 		</nav>
@@ -73,51 +73,57 @@
 
 	<!-- H1 de la página -->
 	<div class="container-fluid" id="description">
+		<h1>Conócenos</h1>
 	</div>
 
-	<div class="container-fluid d-flex justify-content-center">
-		<div class="form" onchange="login()">
-      
-      		<div class="tab-content">
-        		<div id="signup">   
-	          		<h1 class="animated bounce fadeIn">Inicia Sesión</h1>
-	          
-	          		<form th:action="@{/login}" method="POST" onkeyup="validateLogin()">
-	
-	          
-	            	<div class="top-row">
-						<div class="field-wrap">
-		 					<p><input type="text" size="15" id="userLogin" name="userLogin" placeholder="Usuario"/></p>
-		 					<span id="userError" class="d-none text-danger">Entre 4-20 caracteres.</span>
-	            		</div>
-	            
-	            		<div class="field-wrap">
-		 					<p><input type="password" size="20" id="passLogin" name="passLogin" placeholder="Contraseña"/></p>
-	            			<span id="passError" class="d-none text-danger">Entre 4-20 caracteres.</span>
-	            		</div>
-	            	
-	          		</div>
-	          	
-	          		<div th:if="${param.error}" class="alert alert-danger animated bounce shake" role="alert">Compruebe sus credenciales.</div>
-	          	
-	         
-	         		 <input type="submit" disabled id="btnLogin" class="button button-block btn-warning" value="iniciar"/>
-	          
-	          		</form>
+	<section class="container-fluid">
+		<div class="container">
+			<h3>¿Quiénes somos?</h3>
+			<div class="row">
+				<div class="col-md-4">
+					<img alt="" class="rounded-circle border border-white" width="200px" src="images/20200206_125459.jpg">
+				</div>
+				<div class="col-md-8">
+					<p>Hola a todos.</p>
+					<p>Mi nombre es Daniel, soy técnico de Sistemas
+						Microinformáticos y Redes (SMR). Actualmente soy estudiante de
+						Desarrollo de Aplicaciones Web (DAW) en el instituto I.E.S Alixar,
+						situado en el pueblo de Castilleja de la Cuesta, Sevilla.
+					</p>
+					<p>Este curso no he podido hacer la FCT en Deloitte por culpa
+						del Covid-19 pero estoy haciendo mi proyecto ahora para practicar
+						y así tener más tiempo para dedicar a la empresa en septiembre.
+					</p>
+				</div>	
+			</div>
+			<h3>¿En qué consiste la web?</h3>
+			<p>Eventos Sevilla es una web donde puedes ver todas las
+				actividades que puedes realizar en esta ciudad al alcance de un solo
+				clic. Puedes elegir entre diferentes categorías de evento según tus
+				gustos personales (museos, discotecas, acuarios, música en directo,
+				etc.)
+			</p>
+			
+			<h3>¿Qué puedo hacer en esta web?</h3>
+			<p>Puedes crear tus propios eventos. Nosotros revisaremos el
+				evento y si está todo correcto lo publicaremos en este sitio web
+				para que de esta manera pueda llegar a más personas y así tu evento
+				sea todo un verdadero éxito.
+			</p>
 
-        		</div>
-        
-        		<div id="login">   
-          
-        		</div>
-        
-      	</div><!-- tab-content -->
-      
-</div> <!-- /form -->
-	</div>
+			<h3>¿Como estar al día de los eventos?</h3>
+			<p>Puedes compartir los eventos con las personas que tú quieras,
+				solo tienes que seguirnos en nuestras redes sociales, allí
+				publicamos todos los eventos y es más fácil darlos a conocer y
+				compartirlos con muchas más personas.
+			</p>
+			
+			<p>Para más información revisa nuestras redes sociales.
+			</p>
+		</div>
+	</section>
 	
-	
-	
+
 
 	<!-- Footer de la página -->
 	<footer class="jumbotron mt-5 mb-0">

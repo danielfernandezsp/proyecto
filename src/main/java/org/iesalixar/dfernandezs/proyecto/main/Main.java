@@ -1,6 +1,5 @@
 package org.iesalixar.dfernandezs.proyecto.main;
 
-import java.time.LocalDateTime;
 import java.util.Date;
 import java.util.HashSet;
 import java.util.Set;
@@ -17,9 +16,9 @@ import org.iesalixar.dfernandezs.proyecto.repository.AuthorityRepository;
 import org.iesalixar.dfernandezs.proyecto.repository.CategoryRepository;
 import org.iesalixar.dfernandezs.proyecto.repository.CommentRepository;
 import org.iesalixar.dfernandezs.proyecto.repository.EventRepository;
+import org.iesalixar.dfernandezs.proyecto.repository.ForumRepository;
 import org.iesalixar.dfernandezs.proyecto.repository.ProvinceRepository;
 import org.iesalixar.dfernandezs.proyecto.repository.UserRepository;
-import org.iesalixar.dfernandezs.proyecto.repository.ForumRepository;
 import org.springframework.boot.SpringApplication;
 import org.springframework.context.ConfigurableApplicationContext;
 import org.springframework.security.crypto.bcrypt.BCryptPasswordEncoder;
@@ -61,7 +60,7 @@ public class Main {
 		jaen.setName("Jaén");
 		granada.setName("Granada");
 		cordoba.setName("Córdoba");
-		almeria.setName("Almeria");
+		almeria.setName("Almería");
 		huelva.setName("Huelva");
 		cadiz.setName("Cádiz");
 
@@ -85,17 +84,13 @@ public class Main {
 		daniel.setName("Daniel");
 		daniel.setLastName("Fernández Sánchez-Palencia");
 		daniel.setUsername("dani");
-		daniel.setBirthday(LocalDateTime.parse("1995-10-06t00:00:00"));
 		daniel.setPassword(bCryptPasswordEncoder.encode("1234"));
-		daniel.setEmail("daniel@iesalixar.org");
 		daniel.setAuthority(adminList);
 		
 		marina.setName("Marina");
 		marina.setLastName("Carrero Granados");
 		marina.setUsername("marina");
-		marina.setBirthday(LocalDateTime.parse("2000-05-24t00:00:00"));
 		marina.setPassword(bCryptPasswordEncoder.encode("1234"));
-		marina.setEmail("marina@iesalixar.org");
 		marina.setAuthority(userList);
 		
 		// Categories
@@ -121,7 +116,7 @@ public class Main {
 		cultural.setName("Cultural");
 		religioso.setName("Religioso");
 		culinario.setName("Culinario");
-		nocturno.setName("nocturno");
+		nocturno.setName("Nocturno");
 		enBarco.setName("En barco");
 		aireLibre.setName("Al aire libre");
 		paraNinios.setName("Para niños");
@@ -134,26 +129,28 @@ public class Main {
 		categories.add(cultural);
 		categories.add(nocturno);
 		
-		byte[] img = null;
-		LocalDateTime dateStart = LocalDateTime.parse("2020-04-03t09:00:00");
-		LocalDateTime dateEnd = LocalDateTime.parse("2020-04-13t21:00:00");		
+		String img = null;
+		Date dateStart = new Date();
+		Date dateEnd = new Date();
 		
 		Event alcazar = new Event();
 		Forum foroAlcazar = new Forum();
 
 		foroAlcazar.setEvent(alcazar);
 		
+		alcazar.setAllow(false);
 		alcazar.setDate(date);
-		alcazar.setName("Real Alcazar");
+		alcazar.setName("Real Alcázar");
 		alcazar.setDescription("Visita este gran edificio con cientos de años de historia.");
 		alcazar.setCategories(categories);
 		alcazar.setUser(marina);
 		alcazar.setForum(foroAlcazar);
+		alcazar.setPlace("<iframe src=\"https://www.google.com/maps/embed?pb=!1m18!1m12!1m3!1d2241.702970907218!2d-5.991249771931022!3d37.38399662944031!2m3!1f0!2f0!3f0!3m2!1i1024!2i768!4f13.1!3m3!1m2!1s0x0%3A0x13815c8066798890!2sJardines%20alcazares!5e0!3m2!1ses!2ses!4v1590067726829!5m2!1ses!2ses\" width=\"600\" height=\"450\" frameborder=\"0\" style=\"border:0;\" allowfullscreen=\"\" aria-hidden=\"false\" tabindex=\"0\"></iframe>");
 		alcazar.setProvince(sevilla);
 		alcazar.setCapacity(20);
+		alcazar.setWebSite("https://www.alcazarsevilla.org/");
 		alcazar.setEnd_event(dateEnd);
 		alcazar.setStart_event(dateStart);
-		alcazar.setForum(foroAlcazar);
 		alcazar.setImage(img);
 		
 		// Comments

@@ -1,39 +1,52 @@
 <!doctype html>
-<html lang="en"xmlns="http://www.w3.org/1999/xhtml" xmlns:th="http://www.thymeleaf.org" xmlns:sec="http://www.thymeleaf.org/extras/spring-security">
+<html lang="en" xmlns="http://www.w3.org/1999/xhtml"
+	xmlns:th="http://www.thymeleaf.org"
+	xmlns:sec="http://www.thymeleaf.org/extras/spring-security">
 
 <head>
-	<title>EventoSSevilla</title>
-	<!-- Required meta tags -->
-	<meta charset="utf-8">
-	<meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
-    <meta http-equiv="X-UA-Compatible" content="IE=edge" />
+<title>EventoSSevilla</title>
+<!-- Required meta tags -->
+<meta charset="utf-8">
+<meta name="viewport"
+	content="width=device-width, initial-scale=1, shrink-to-fit=no">
+<meta http-equiv="X-UA-Compatible" content="IE=edge" />
 
-	<!-- Bootstrap CSS -->
-	<link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/css/bootstrap.min.css"
-		integrity="sha384-ggOyR0iXCbMQv3Xipma34MD+dH/1fQ784/j6cY/iJTQUOhcWr7x9JvoRxT2MZw1T" crossorigin="anonymous">
-	<link rel="stylesheet" href="../css/typography.css">
-	<link rel="stylesheet" href="../css/header.css">
-	<link rel="stylesheet" href="../css/section.css">
-	<link rel="stylesheet" href="../css/footer.css">
-	<link rel="stylesheet" href="../css/body.css">
-	<link rel="stylesheet" href="../css/forms.css">
-	<script src="../js/javascript.js"></script>
-	<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/animate.css/3.7.2/animate.min.css">
-	<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css">
-	<link rel="shortcut icon" href="../images/icono.png" type="image/x-icon">
-	<link href="//maxcdn.bootstrapcdn.com/font-awesome/4.7.0/css/font-awesome.min.css" rel="stylesheet">
+<!-- Bootstrap CSS -->
+<link rel="stylesheet"
+	href="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/css/bootstrap.min.css"
+	integrity="sha384-ggOyR0iXCbMQv3Xipma34MD+dH/1fQ784/j6cY/iJTQUOhcWr7x9JvoRxT2MZw1T"
+	crossorigin="anonymous">
+<link rel="stylesheet" href="../css/typography.css">
+<link rel="stylesheet" href="../css/header.css">
+<link rel="stylesheet" href="../css/section.css">
+<link rel="stylesheet" href="../css/footer.css">
+<link rel="stylesheet" href="../css/body.css">
+<link rel="stylesheet" href="../css/forms.css">
+<script src="../js/javascript.js"></script>
+<link rel="stylesheet"
+	href="https://cdnjs.cloudflare.com/ajax/libs/animate.css/3.7.2/animate.min.css">
+<link rel="stylesheet"
+	href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css">
+<link rel="shortcut icon" href="../images/icono.png" type="image/x-icon">
+<link
+	href="//maxcdn.bootstrapcdn.com/font-awesome/4.7.0/css/font-awesome.min.css"
+	rel="stylesheet">
 
-	<link href="https://fonts.googleapis.com/css?family=Gentium+Book+Basic&display=swap" rel="stylesheet">
+<link
+	href="https://fonts.googleapis.com/css?family=Gentium+Book+Basic&display=swap"
+	rel="stylesheet">
 </head>
 
 <body>
 	<header>
 		<nav class="navbar navbar-expand-lg navbar-light bg-info">
-			<a class="navbar-brand d-md-inline d-lg-none" href="/"> <img src="../images/logo.png" height="60"
-					class="d-inline-block align-top" alt="">
+			<a class="navbar-brand d-md-inline d-lg-none" href="/"> <img
+				src="../images/logo.png" height="60"
+				class="d-inline-block align-top" alt="">
 			</a>
-			<button class="navbar-toggler bg-light" type="button" data-toggle="collapse"
-				data-target="#navbarSupportedContent" aria-controls="navbarSupportedContent" aria-expanded="false"
+			<button class="navbar-toggler bg-light" type="button"
+				data-toggle="collapse" data-target="#navbarSupportedContent"
+				aria-controls="navbarSupportedContent" aria-expanded="false"
 				aria-label="Toggle navigation">
 				<span class="navbar-toggler-icon"></span>
 			</button>
@@ -41,18 +54,19 @@
 			<div class="collapse navbar-collapse" id="navbarSupportedContent">
 				<ul class="navbar-nav m-auto d-flex justify-item-center">
 					<li class="nav-item"><a class="nav-link" href="/events">Eventos</a></li>
-					<li class="nav-item"><a class="nav-link" href="#">Foro</a></li>
-					<li class="nav-item"><a class="nav-link" href="#">Conócenos</a></li>
+					<li class="nav-item"><a class="nav-link" href="/about">Conócenos</a></li>
 				</ul>
 
-				<a class="navbar-brand d-none d-lg-inline  animated bounce fadeIn" href="/"> <img src="../images/logo.png" height="60"
-						class="d-inline-block align-top" alt="">
+				<a class="navbar-brand d-none d-lg-inline  animated bounce fadeIn"
+					href="/"> <img src="../images/logo.png" height="60"
+					class="d-inline-block align-top" alt="">
 				</a>
 
 				<ul class="navbar-nav m-auto d-flex justify-item-center">
-					<li class="nav-item"><a class="nav-link" href="#">FAQs</a></li>
-					<li class="nav-item"><a class="nav-link" th:if="${session != null}" href="/private/home">Perfil</a></li>
-					<li class="nav-item"><a class="nav-link" th:href="@{/logout}">Cerrar sesión</a></li>
+					<li class="nav-item"><a class="nav-link"
+						th:if="${session != null}" href="/private/home">Perfil</a></li>
+					<li class="nav-item"><a class="nav-link" th:href="@{/logout}">Cerrar
+							sesión</a></li>
 				</ul>
 			</div>
 		</nav>
@@ -60,69 +74,215 @@
 
 	<!-- H1 y H2 de la página -->
 	<div class="container-fluid" id="description">
-		<h1 class="text-center animated bounce bounceInDown">¡AUTENTICADO [[${#httpServletRequest.remoteUser.toUpperCase()}]]!</h1>
+		<h1 class="text-center animated bounce bounceInDown">¡AUTENTICADO
+			[[${#httpServletRequest.remoteUser.toUpperCase()}]]!</h1>
 	</div>
 
 	<section class="container-fluid">
-	
-	<div class="row">
-	
-		
-		
-		<div class="col-12 col-md-12 col-lg-3 bg-dark text-center">
-			<h3 class="d-inline-block">Perfíl</h3>
-			
-			<i data-toggle="collapse" id="up" data-target="#profileCard" class="d-lg-none fa fa-angle-double-down"></i>			
-			
-			<div id="profileCard" class="card collapse d-lg-block">
-				<img id="profileImage" class="col-12" th:src="@{'data:image/png;base64,'+${image}}"></img>
-				  <div class="card-body">
-					    <ul class="text-left">
-								
+
+		<div class="row options">
+
+
+
+			<div class="col-12 col-md-12 col-lg-3 bg-dark text-center">
+				<h3 class="d-inline-block">Perfíl</h3>
+
+				<i data-toggle="collapse" id="up" data-target="#profileCard"
+					class="d-lg-none fa fa-angle-double-down"></i>
+
+				<div id="profileCard" class="card collapse d-lg-block">
+					<img
+						th:src="${(image != null && !#strings.isEmpty(image)) ? image : 'https://www.m-x.com.mx/assets/default-user-avatar.png'}"
+						id="profileImage" class="col-12 w-50"></img>
+					<div class="card-body">
+						<ul class="text-left">
+
 							<li>
 								<p class="text-dark" th:text="${name + ' ' + lastName}"></p>
 							</li>
-										
+
 							<li>
 								<h4 class="text-dark">Usuario:</h4>
 								<p class="text-dark" th:text="${userName}"></p>
 							</li>
-										
+
 							<li>
 								<h4 class="text-dark">Rol:</h4>
 								<p class="text-dark" sec:authorize="hasAuthority('ADMIN')">ADMIN</p>
-								<p class="text-dark" sec:authorize="hasAuthority('USER')">USER</p>	
+								<p class="text-dark" sec:authorize="hasAuthority('USER')">USER</p>
 							</li>
-					
+
 						</ul>
-				  </div>
+						<button type="button" data-toggle="modal" data-target="#update"
+							class="btn btn-warning btn-sm">
+							Modificar<i class="adminIcon fa fa-refresh"></i>
+						</button>
+					</div>
+					<a href="/admin/admin" class="button button-block text-center"
+					sec:authorize="hasAuthority('ADMIN')">Administración</a>
+				</div>
 			</div>
+
+
+
+
+
+
+			<!-- MODAL USER UPDATE -->
+			<div class="modal fade" id="update" tabindex="-1" role="dialog"
+				aria-labelledby="exampleModalLabel" aria-hidden="true">
+				<div class="modal-dialog" role="document">
+					<div class="modal-content">
+						<div class="modal-header">
+							<h5 class="modal-title text-dark" id="exampleModalLabel"
+								th:text="'Editar usuario '+${userName}"></h5>
+							<button type="button" class="close" data-dismiss="modal"
+								aria-label="Close">
+								<span aria-hidden="true">&times;</span>
+							</button>
+						</div>
+						<div class="modal-body">
+							<form th:action="@{/updateProfile}" th:object="${user}"
+								method="POST" onchange="validateUserUpdate()" onkeyup="validateUserUpdate()">
+
+								<div class="form-group">
+									<label for="message-text" class="col-form-label text-dark">Nombre:</label>
+									<input id="userName" class="form-control" type="text" size="20" name="name"
+										th:value="${name}">
+									<span id="userNameError" class="d-none text-danger">Entre 4-15 caracteres.</span>
+								</div>
+								<div class="form-group">
+									<label for="message-text" class="col-form-label text-dark">Apellidos:</label>
+									<input id="userLastName" class="form-control" type="text" size="40"
+										name="lastName" th:value="${lastName}">
+									<span id="userLastNameError" class="d-none text-danger">Entre 4-50 caracteres.</span>		
+								</div>
+								<div class="form-group">
+									<label for="message-text" class="col-form-label text-dark">Usuario:</label>
+									<input class="form-control" type="text" name="username"
+										readonly="readonly" th:value="${userName}">
+								</div>
+
+								<div class="form-group">
+									<p>
+										<input onchange="previewFile()" type="file" id="imageFile"
+											name="imageFile" accept="image/png" placeholder="Foto" />
+									</p>
+									<img id="preview"
+										th:src="${(image != null && !#strings.isEmpty(image)) ? image : 'https://www.m-x.com.mx/assets/default-user-avatar.png'}"
+										class="w-25" alt="Image preview..."> <input
+										class="d-none" th:value="${image}" name="image" type="text" id="image" />
+								</div>
+
+								<div class="form-group d-none">
+									<label for="message-text" class="col-form-label text-dark">Contraseña:</label>
+									<input class="form-control" type="password" name="password"
+										th:value="${password}">
+								</div>
+								<div class="modal-footer">
+									<button type="button" class="btn btn-secondary"
+										data-dismiss="modal">Cerrar</button>
+									<button id="btnUpdate" disabled type="submit" class="btn btn-warning">Actualizar</button>
+								</div>
+							</form>
+						</div>
+
+					</div>
+				</div>
+			</div>
+
+
+
+
+
+
+			<div class="col-12  col-lg-9">
+				<h3 class="text-center">Mis eventos</h3>
+				<a class="button button-block text-center"
+					href="/private/eventCreator">Crear nuevo evento</a>
+				<ul id="event" th:each="event:${eventList}">
+					<li><h3 th:text="${event.name}"></h3></li>
+					<li th:text="${event.description}"></li>
+					<li><h5 th:text="${event.date}"></h5></li>
+					<li>
+						<form class="d-inline" method="post" th:action="@{/deleteMyEvent}">
+							<input type="hidden" name="event_id" th:value="${event.event_id}">
+							<button type="submit" class="btn btn-danger btn-sm">
+								<i class="adminIcon fa fa-times"></i>
+							</button>
+						</form>
+						<button type="button" class="btn btn-warning btn-sm"
+							data-toggle="modal"
+							th:attr="data-target='#preview'+${event.event_id}">
+							<i class="adminIcon fa fa-refresh"></i>
+						</button>
+					</li>
+
+					<hr>
+				</ul>
+
+			</div>
+			<div class="modal fade" th:each="event:${eventList}"
+				th:id="'preview' + ${event.event_id}" tabindex="-1" role="dialog"
+				aria-labelledby="myLargeModalLabel" aria-hidden="true">
+				<div class="modal-dialog modal-lg">
+					<div class="p-2 modal-content">
+						<form class="d-inline" method="post" th:action="@{/updateEvent}">
+							<div class="text-center">	
+								<img th:src="${(event.image != null && !#strings.isEmpty(event.image)) ? event.image : ''}" id="imageEvent" class="w-50 col-12"></img>
+							</div>
+							<h4 class="text-dark">Nombre:</h4>
+							<input type="text" name="name" readonly="readonly" class="col-11 mx-auto text-dark"
+								th:value="${event.name}" />
+
+							<h4 class="text-dark">Descripción:</h4>
+							<textarea name="description" class="col-11 mx-auto text-dark"
+								th:text="${event.description}"></textarea>
+
+							<h4 class="text-dark">Lugar:</h4>
+							<input type="text" name="place" class="col-11 mx-auto text-dark"
+								th:value="${event.place}" />
+							<p th:utext="${event.place}"></p>
+
+							<h4 class="text-dark">Contacto/información:</h4>
+							<input type="text" name="webSite"
+								class="col-11 mx-auto text-dark" th:value="${event.webSite}" />
+
+							<h4 class="text-dark">Fecha inicio:</h4>
+							<p class="text-dark" th:text="${event.start_event}"></p>
+							<input type="date" name="start_event"
+								class="col-11 mx-auto text-dark" th:value="${event.start_event}" />
+
+							<h4 class="text-dark">Fecha fin:</h4>
+							<p class="text-dark" th:text="${event.end_event}"></p>
+							<input type="date" name="end_event"
+								class="col-11 mx-auto text-dark" th:value="${event.end_event}" />
+
+							<input type="number" name="event_id" class="d-none"
+								th:value="${event.event_id}" />
+								<div class="modal-footer">
+								<button type="submit" class="btn btn-warning">
+								Actualizar
+							</button>
+							<button type="button" class="btn btn-secondary"
+							data-dismiss="modal">Cerrar</button>
+								</div>
+							
+						</form>
 						
+					</div>
+				</div>
+			</div>
 		</div>
-		<div class="col-12 col-md-8 col-lg-6">
-			<h3 class="text-center">Mis eventos</h3>
-			<a class="button button-block text-center" href="/private/eventCreator">Crear nuevo evento</a>
-			<ul th:each="event:${eventList}">
-				<li><h2 th:text="${event.name}"></h2></li>
-				<li th:text="${event.description}"></li>
-				<li><h5 th:text="${event.date}"></h5></li>
-				<hr>
-			</ul>
-		</div>
-		<div class="col-12 col-md-4 col-lg-3 bg-dark">
-			<h3 class="text-center">Más cosas</h3>
-		</div>
-	</div>
 	</section>
 
 	<!-- Footer de la página -->
 	<footer class="jumbotron mt-5 mb-0">
 		<div class="row">
 			<div id="social" class="col-12 col-lg-3 mb-3 text-center">
-				<a href="#" class="fa fa-instagram"></a>
-				<a href="#" class="fa fa-youtube"></a>
-				<a href="#" class="fa fa-twitter"></a>
-				<a href="#" class="fa fa-facebook"></a>
+				<a href="#" class="fa fa-instagram"></a> <a href="#"
+					class="fa fa-youtube"></a> <a href="#" class="fa fa-twitter"></a> <a
+					href="#" class="fa fa-facebook"></a>
 			</div>
 			<div class="row col-12 col-lg-6" id="logos">
 				<img class="col-4 mb-3" src="../images/logo-catedral.png" alt="">
@@ -140,7 +300,8 @@
 				</ul>
 			</div>
 		</div>
-		<p class="text-center mt-4">Web realizada por Daniel Fernández Sánchez-Palencia</p>
+		<p class="text-center mt-4">Web realizada por Daniel Fernández
+			Sánchez-Palencia</p>
 	</footer>
 
 
@@ -149,16 +310,21 @@
 	<!-- Optional JavaScript -->
 	<!-- jQuery first, then Popper.js, then Bootstrap JS -->
 	<script src="https://code.jquery.com/jquery-3.3.1.slim.min.js"
-		integrity="sha384-q8i/X+965DzO0rT7abK41JStQIAqVgRVzpbzo5smXKp4YfRvH+8abtTE1Pi6jizo" crossorigin="anonymous">
-
+		integrity="sha384-q8i/X+965DzO0rT7abK41JStQIAqVgRVzpbzo5smXKp4YfRvH+8abtTE1Pi6jizo"
+		crossorigin="anonymous">
+		
 	</script>
-	<script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.14.7/umd/popper.min.js"
-		integrity="sha384-UO2eT0CpHqdSJQ6hJty5KVphtPhzWj9WO1clHTMGa3JDZwrnQq4sF86dIHNDz0W1" crossorigin="anonymous">
-
+	<script
+		src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.14.7/umd/popper.min.js"
+		integrity="sha384-UO2eT0CpHqdSJQ6hJty5KVphtPhzWj9WO1clHTMGa3JDZwrnQq4sF86dIHNDz0W1"
+		crossorigin="anonymous">
+		
 	</script>
-	<script src="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/js/bootstrap.min.js"
-		integrity="sha384-JjSmVgyd0p3pXB1rRibZUAYoIIy6OrQ6VrjIEaFf/nJGzIxFDsf4x0xIM+B07jRM" crossorigin="anonymous">
-
+	<script
+		src="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/js/bootstrap.min.js"
+		integrity="sha384-JjSmVgyd0p3pXB1rRibZUAYoIIy6OrQ6VrjIEaFf/nJGzIxFDsf4x0xIM+B07jRM"
+		crossorigin="anonymous">
+		
 	</script>
 
 </body>

@@ -1,10 +1,21 @@
 package org.iesalixar.dfernandezs.proyecto.model;
 
 import java.io.Serializable;
-import java.time.LocalDateTime;
 import java.util.HashSet;
 import java.util.Set;
-import javax.persistence.*;
+
+import javax.persistence.CascadeType;
+import javax.persistence.Column;
+import javax.persistence.Entity;
+import javax.persistence.FetchType;
+import javax.persistence.GeneratedValue;
+import javax.persistence.GenerationType;
+import javax.persistence.Id;
+import javax.persistence.Lob;
+import javax.persistence.ManyToMany;
+import javax.persistence.OneToMany;
+import javax.validation.constraints.NotEmpty;
+import javax.validation.constraints.Size;
 
 
 @Entity
@@ -19,29 +30,24 @@ public class User implements Serializable {
 	@GeneratedValue(strategy=GenerationType.IDENTITY)
 	private long id;
 	
+	@NotEmpty
+	@Size(min = 3, max = 15, message = "El nombre debe tener mas de 3 letras y menos de 15.")
 	@Column(length = 15, nullable = false)
 	private String name = "";
 	
+	@NotEmpty
+	@Size(min = 6, max = 50)
 	@Column(length = 50, nullable = false)
 	private String lastName = "";
 	
-	@Column(unique = true, length = 50, nullable = false)
-	private String email = "";
-	
+	@NotEmpty
 	@Column(length = 20, nullable = false, unique = true)
 	private String username = "";
 	
+	@NotEmpty
 	@Column(length = 255, nullable = false)
 	private String password = "";
 	
-	@Column(nullable = false)
-	private LocalDateTime birthday = null;
-	
-//	@JoinTable(
-//	        name = "user_rol",
-//	        joinColumns = @JoinColumn(name = "user", nullable = false),
-//	        inverseJoinColumns = @JoinColumn(name="rol", nullable = false)
-//	    )
 	@ManyToMany(fetch = FetchType.EAGER)
 	private Set<Authority> authority = new HashSet<Authority>();
 	
@@ -53,28 +59,15 @@ public class User implements Serializable {
 	
 	@Lob
 	@Column (name = "image")
-	private byte[] image;
+	private String image;
 	
 	public User() {
 		
 	}
-
-//	public User(String username, String password, String authority) {
-//		this.username = username;
-//		this.password = password;
-//		this.authority = authority;
-//	}
-//	
-//	public User(String name, String lastName, String email, String username, String password, LocalDateTime birthday, byte[] image) {
-//		super();
-//		this.name = name;
-//		this.lastName = lastName;
-//		this.email = email;
-//		this.username = username;
-//		this.password = password;
-//		this.birthday = birthday;
-//		this.image = image;
-//	}
+	
+	public long getId() {
+		return id;
+	}
 
 	public String getName() {
 		return name;
@@ -90,14 +83,6 @@ public class User implements Serializable {
 
 	public void setLastName(String lastName) {
 		this.lastName = lastName;
-	}
-	
-	public String getEmail() {
-		return email;
-	}
-
-	public void setEmail(String email) {
-		this.email = email;
 	}
 
 	public String getUsername() {
@@ -116,16 +101,6 @@ public class User implements Serializable {
 		this.password = password;
 	}
 
-	public LocalDateTime getBirthday() {
-		return birthday;
-	}
-
-	public void setBirthday(LocalDateTime birthday) {
-		this.birthday = birthday;
-	}
-
-	
-	
 	public Set<Authority> getAuthority() {
 		return authority;
 	}
@@ -151,11 +126,11 @@ public class User implements Serializable {
 		this.comments = comments;
 	}
 
-	public byte[] getImage() {
+	public String getImage() {
 		return image;
 	}
 
-	public void setImage(byte[] image) {
+	public void setImage(String image) {
 		this.image = image;
 	}
 	

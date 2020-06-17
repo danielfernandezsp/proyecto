@@ -1,0 +1,378 @@
+<!doctype html>
+<html lang="en" xmlns="http://www.w3.org/1999/xhtml"
+	xmlns:th="http://www.thymeleaf.org"
+	xmlns:sec="http://www.thymeleaf.org/extras/spring-security">
+
+<head>
+<title>EventoSSevilla</title>
+<!-- Required meta tags -->
+<meta charset="utf-8">
+<meta name="viewport"
+	content="width=device-width, initial-scale=1, shrink-to-fit=no">
+<meta http-equiv="X-UA-Compatible" content="IE=edge" />
+
+<!-- Bootstrap CSS -->
+<link rel="stylesheet"
+	href="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/css/bootstrap.min.css"
+	integrity="sha384-ggOyR0iXCbMQv3Xipma34MD+dH/1fQ784/j6cY/iJTQUOhcWr7x9JvoRxT2MZw1T"
+	crossorigin="anonymous">
+<link rel="stylesheet" href="../css/typography.css">
+<link rel="stylesheet" href="../css/header.css">
+<link rel="stylesheet" href="../css/section.css">
+<link rel="stylesheet" href="../css/footer.css">
+<link rel="stylesheet" href="../css/body.css">
+<link rel="stylesheet" href="../css/forms.css">
+<script src="../js/javascript.js"></script>
+<link rel="stylesheet"
+	href="https://cdnjs.cloudflare.com/ajax/libs/animate.css/3.7.2/animate.min.css">
+<link rel="stylesheet"
+	href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css">
+<link rel="shortcut icon" href="../images/icono.png" type="image/x-icon">
+<link
+	href="//maxcdn.bootstrapcdn.com/font-awesome/4.7.0/css/font-awesome.min.css"
+	rel="stylesheet">
+
+<link
+	href="https://fonts.googleapis.com/css?family=Gentium+Book+Basic&display=swap"
+	rel="stylesheet">
+</head>
+
+<body>
+	<header>
+		<nav class="navbar navbar-expand-lg navbar-light bg-info">
+			<a class="navbar-brand d-md-inline d-lg-none" href="/"> <img
+				src="../images/logo.png" height="60"
+				class="d-inline-block align-top" alt="">
+			</a>
+			<button class="navbar-toggler bg-light" type="button"
+				data-toggle="collapse" data-target="#navbarSupportedContent"
+				aria-controls="navbarSupportedContent" aria-expanded="false"
+				aria-label="Toggle navigation">
+				<span class="navbar-toggler-icon"></span>
+			</button>
+
+			<div class="collapse navbar-collapse" id="navbarSupportedContent">
+				<ul class="navbar-nav m-auto d-flex justify-item-center">
+					<li class="nav-item"><a class="nav-link" href="/events">Eventos</a></li>
+					<li class="nav-item"><a class="nav-link" href="/about">Conócenos</a></li>
+				</ul>
+
+				<a class="navbar-brand d-none d-lg-inline  animated bounce fadeIn"
+					href="/"> <img src="../images/logo.png" height="60"
+					class="d-inline-block align-top" alt="">
+				</a>
+
+				<ul class="navbar-nav m-auto d-flex justify-item-center">
+					<li class="nav-item"><a class="nav-link"
+						th:if="${session != null}" href="/private/home">Perfil</a></li>
+					<li class="nav-item"><a class="nav-link" th:href="@{/logout}">Cerrar
+							sesión</a></li>
+				</ul>
+			</div>
+		</nav>
+	</header>
+
+	<!-- H1 y H2 de la página -->
+	<div class="container-fluid" id="description">
+		<h1 class="text-center animated bounce bounceInDown">¡ADMIN!</h1>
+	</div>
+
+	<section class="container">
+
+		<div id="accordion">
+			<div class="card">
+				<div class="card-header" id="headingOne">
+					<h5 class="mb-0">
+						<button class="btn btn-link" data-toggle="collapse"
+							data-target="#collapseOne" aria-expanded="true"
+							aria-controls="collapseOne">USUARIOS</button>
+					</h5>
+				</div>
+
+				<div id="collapseOne" class="collapse show"
+					aria-labelledby="headingOne" data-parent="#accordion">
+					<table class="table table-dark col-12">
+						<thead>
+							<tr>
+								<th scope="col">ID</th>
+								<th scope="col">Nombre</th>
+								<th scope="col">Usuario</th>
+								<th></th>
+								<th></th>
+
+							</tr>
+						</thead>
+						<tbody>
+							<tr th:each="user:${users}">
+								<th scope="row" th:text="${user.id}"></th>
+								<td th:text="${user.name}"></td>
+								<td th:text="${user.username}"></td>
+								<td></td>
+								<td>
+									<form class="d-inline" method="post"
+										th:action="@{/user/update}">
+										<input type="hidden" name="id" th:value="${user.id}">
+										<button type="button" data-toggle="modal"
+											th:attr="data-target='#userUpdate'+${user.id}"
+											class="btn btn-outline-warning btn-sm">
+											<i class="adminIcon fa fa-refresh"></i>
+										</button>
+									</form>
+									<form class="d-inline" method="post"
+										th:action="@{/user/remove}">
+										<input type="hidden" name="id" th:value="${user.id}">
+										<button th:if="${user.id != 1}" type="submit"
+											class="btn btn-outline-danger btn-sm">
+											<i class="adminIcon fa fa-times"></i>
+										</button>
+									</form>
+								</td>
+
+							</tr>
+						</tbody>
+					</table>
+
+					<!-- MODAL USER UPDATE -->
+					<div class="modal fade" th:each="user:${users}"
+						th:id="'userUpdate'+${user.id}" tabindex="-1" role="dialog"
+						aria-labelledby="exampleModalLabel" aria-hidden="true">
+						<div class="modal-dialog" role="document">
+							<div class="modal-content">
+								<div class="modal-header">
+									<h5 class="modal-title text-dark" id="exampleModalLabel"
+										th:text="'Editar usuario '+${user.username}"></h5>
+									<button type="button" class="close" data-dismiss="modal"
+										aria-label="Close">
+										<span aria-hidden="true">&times;</span>
+									</button>
+								</div>
+								<div class="modal-body">
+									<form th:action="@{/updateUser}" th:object="${user}"
+										method="POST">
+										<div class="form-group">
+											<label for="message-text" class="col-form-label text-dark">ID:</label>
+											<input class="form-control" type="number" size="20" name="id"
+												readonly="readonly" th:value="${user.id}">
+										</div>			
+										<div class="form-group">
+											<img id="preview"
+											th:src="${(user.image != null && !#strings.isEmpty(user.image)) ? user.image : 'https://www.m-x.com.mx/assets/default-user-avatar.png'}"
+											class="w-25" alt="Image preview..."> 
+											<input class="d-none" th:value="${user.image}" name="image" type="text" id="image" />
+										</div>
+										<div class="form-group">
+											<label for="message-text" class="col-form-label text-dark">Nombre:</label>
+											<input maxlength="15" class="form-control" type="text" size="20" name="name"
+												th:value="${user.name}">
+										</div>
+										<div class="form-group">
+											<label for="message-text" class="col-form-label text-dark">Apellidos:</label>
+											<input maxlength="50" class="form-control" type="text" size="40"
+												name="lastName" th:value="${user.lastName}">
+										</div>
+										<div class="form-group">
+											<label for="message-text" class="col-form-label text-dark">Usuario:</label>
+											<input class="form-control" type="text" name="username"
+												readonly="readonly" th:value="${user.username}">
+										</div>
+										<div class="form-group d-none">
+											<label for="message-text" class="col-form-label text-dark">Contraseña:</label>
+											<input class="form-control" type="password" name="password"
+												th:value="${user.password}">
+										</div>
+										<div class="modal-footer">
+											<button type="button" class="btn btn-secondary"
+												data-dismiss="modal">Cerrar</button>
+											<button type="submit" class="btn btn-warning">Actualizar</button>
+										</div>
+									</form>
+								</div>
+							</div>
+						</div>
+					</div>
+				</div>
+			</div>
+			<div class="card">
+				<div class="card-header" id="headingTwo">
+					<h5 class="mb-0">
+						<button class="btn btn-link collapsed" data-toggle="collapse"
+							data-target="#collapseTwo" aria-expanded="false"
+							aria-controls="collapseTwo">Eventos ALLOW</button>
+					</h5>
+				</div>
+				<div id="collapseTwo" class="collapse" aria-labelledby="headingTwo"
+					data-parent="#accordion">
+					<table class="table table-dark col-12">
+						<thead>
+							<tr>
+								<th scope="col">ID</th>
+								<th scope="col">Nombre</th>
+								<th scope="col">Fin</th>
+								<th></th>
+							</tr>
+						</thead>
+						<tbody>
+							<tr th:each="eventAllow:${eventsAllow}">
+								<th scope="row" th:text="${eventAllow.event_id}"></th>
+								<td th:text="${eventAllow.name}"></td>
+								<td th:id="'eventEnd' + ${eventAllow.event_id}" th:text="${eventAllow.end_event} ?: 'Indefinido'"></td>
+								<td>
+									<form class="d-inline" method="post"
+										th:action="@{/event/remove}">
+										<input type="hidden" name="event_id"
+											th:value="${eventAllow.event_id}">
+										<button type="submit" class="btn btn-outline-danger btn-sm">
+											<i class="adminIcon fa fa-times"></i>
+										</button>
+										
+										<a class="btn btn-outline-info btn-sm" target="blank" th:href="@{/event/(id=${eventAllow.event_id})}">											
+											<i class="adminIcon fa fa-eye"></i>
+											</a>
+									</form>
+								</td>
+							</tr>
+						</tbody>
+					</table>
+				</div>
+			</div>
+			<div class="card">
+				<div class="card-header" id="headingThree">
+					<h5 class="mb-0">
+						<button class="btn btn-link collapsed" data-toggle="collapse"
+							data-target="#collapseThree" aria-expanded="false"
+							aria-controls="collapseThree">Eventos DISALLOW</button>
+					</h5>
+				</div>
+				<div id="collapseThree" class="collapse"
+					aria-labelledby="headingThree" data-parent="#accordion">
+					<table class="table table-dark col-12">
+						<thead>
+							<tr>
+								<th scope="col">ID</th>
+								<th scope="col">Nombre</th>
+								<th scope="col">Creación</th>
+								<th></th>
+							</tr>
+						</thead>
+						<tbody>
+							<tr th:each="eventDisallow:${eventsDisallow}">
+								<th scope="row" th:text="${eventDisallow.event_id}"></th>
+								<td th:text="${eventDisallow.name}"></td>
+								<td th:text="${eventDisallow.date}"></td>
+								<td>
+									<form class="d-inline" method="post"
+										th:action="@{/event/allow}">
+										<input type="hidden" name="event_id"
+											th:value="${eventDisallow.event_id}">
+										<button type="submit" class="btn btn-outline-success btn-sm">
+											<i class="adminIcon fa fa-check"></i>
+										</button>
+									</form>
+									<form class="d-inline" method="post"
+										th:action="@{/event/remove}">
+										<input type="hidden" name="event_id"
+											th:value="${eventDisallow.event_id}">
+										<button type="submit" class="btn btn-outline-danger btn-sm">
+											<i class="adminIcon fa fa-times"></i>
+										</button>
+									</form>
+									<button type="button" class="btn btn-outline-info btn-sm"
+										data-toggle="modal"
+										th:attr="data-target='#preview'+${eventDisallow.event_id}">
+										<i class="adminIcon fa fa-eye"></i>
+									</button>
+								</td>
+							</tr>
+						</tbody>
+					</table>
+				</div>
+			</div>
+		</div>
+	</section>
+
+	<!-- Preview modal -->
+
+
+	<div class="modal fade" th:each="eventDisallow:${eventsDisallow}"
+		th:id="'preview' + ${eventDisallow.event_id}" tabindex="-1"
+		role="dialog" aria-labelledby="myLargeModalLabel" aria-hidden="true">
+		<div class="modal-dialog modal-lg">
+			<div class="p-2 modal-content">
+				<img th:src="${eventDisallow.image}" class="mx-auto" width="50%"/>
+				<h4 class="text-dark">Nombre:</h4>
+				<p class="text-dark" th:text="${eventDisallow.name}"></p>
+
+				<h4 class="text-dark">Descripción:</h4>
+				<p class="text-dark" th:text="${eventDisallow.description}"></p>
+
+				<p th:utext="${eventDisallow.place}"></p>
+
+				<a class="mb-1 btn btn-primary" th:href="${eventDisallow.webSite}">Enlace
+					de contacto</a>
+
+				<button type="button" class="mb-1 btn btn-secondary" data-dismiss="modal">Cerrar</button>
+				<form class="d-inline" method="post" th:action="@{/event/remove}">
+					<input type="hidden" name="event_id"
+						th:value="${eventDisallow.event_id}">
+					<button type="submit" class="btn btn-danger col-12">
+						Eliminar evento</button>
+				</form>
+
+			</div>
+		</div>
+	</div>
+
+	<!-- Footer de la página -->
+	<footer class="jumbotron mt-5 mb-0">
+		<div class="row">
+			<div id="social" class="col-12 col-lg-3 mb-3 text-center">
+				<a href="#" class="fa fa-instagram"></a> <a href="#"
+					class="fa fa-youtube"></a> <a href="#" class="fa fa-twitter"></a> <a
+					href="#" class="fa fa-facebook"></a>
+			</div>
+			<div class="row col-12 col-lg-6" id="logos">
+				<img class="col-4 mb-3" src="../images/logo-catedral.png" alt="">
+				<img class="col-4 mb-3" src="../images/logo-acuario.png" alt="">
+				<img class="col-4 mb-3" src="../images/logo-alcazar.png" alt="">
+				<img class="col-4 mb-3" src="../images/logo-maestranza.png" alt="">
+				<img class="col-4 mb-3" src="../images/logo-setas.png" alt="">
+				<img class="col-4 mb-3" src="../images/logo-antique.png" alt="">
+			</div>
+			<div class="col-12 col-lg-3 text-center mt-3" id="ad">
+				<ul>
+					<li><a href="#">Políticas de privacidad</a></li>
+					<li><a href="#">Políticas de cookies</a></li>
+					<li><a href="#">Aviso legal</a></li>
+				</ul>
+			</div>
+		</div>
+		<p class="text-center mt-4">Web realizada por Daniel Fernández
+			Sánchez-Palencia</p>
+	</footer>
+
+
+
+
+	<!-- Optional JavaScript -->
+	<!-- jQuery first, then Popper.js, then Bootstrap JS -->
+	<script src="https://code.jquery.com/jquery-3.3.1.slim.min.js"
+		integrity="sha384-q8i/X+965DzO0rT7abK41JStQIAqVgRVzpbzo5smXKp4YfRvH+8abtTE1Pi6jizo"
+		crossorigin="anonymous">
+		
+	</script>
+	<script
+		src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.14.7/umd/popper.min.js"
+		integrity="sha384-UO2eT0CpHqdSJQ6hJty5KVphtPhzWj9WO1clHTMGa3JDZwrnQq4sF86dIHNDz0W1"
+		crossorigin="anonymous">
+		
+	</script>
+	<script
+		src="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/js/bootstrap.min.js"
+		integrity="sha384-JjSmVgyd0p3pXB1rRibZUAYoIIy6OrQ6VrjIEaFf/nJGzIxFDsf4x0xIM+B07jRM"
+		crossorigin="anonymous">
+		
+	</script>
+
+</body>
+
+</html>
