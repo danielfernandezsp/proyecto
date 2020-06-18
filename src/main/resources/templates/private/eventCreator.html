@@ -27,7 +27,7 @@
 	<link href="https://fonts.googleapis.com/css?family=Gentium+Book+Basic&display=swap" rel="stylesheet">
 </head>
 
-<body onchange="validateEvent()">
+<body onload="eventCreateStorage()" onchange="validateEvent()">
 	<header>
 		<nav class="navbar navbar-expand-lg navbar-light bg-info">
 			<a class="navbar-brand d-md-inline d-lg-none" href="/"> <img src="../images/logo.png" height="60"
@@ -70,13 +70,16 @@
         		<div id="signup">   
           			<h1 class="animated bounce fadeIn">Nuevo evento</h1>
           			<h5 class="text-center">Los campos con (*) son obligatórios.</h5>
-          			<form th:action="@{/addEvent}" th:object="${event}" method="POST" onkeyup="validateEvent()">
+          			<form th:action="@{/addEvent}" th:object="${event}" method="POST" onchange="eventCreate()" onkeyup="validateEvent()">
           
 		          		<div class="row">
 		          		
 		          			<!-- Nombre -->
 		            		<div class="col-12">
 			            		<p>Nombre*</p>
+			            		<div th:if="${session.eventError} != null" class="alert alert-danger" role="alert">
+          							<span class="text-dark" th:text="${session.eventError}"></span>
+          						</div>
 			              		<p><input type="text" id="eventName" size="20" name="name" placeholder="Nombre del evento"/></p>		              			
 			           			<span id="eventNameError" class="d-none text-danger">Entre 4-50 caracteres.</span>
 			           		</div>	

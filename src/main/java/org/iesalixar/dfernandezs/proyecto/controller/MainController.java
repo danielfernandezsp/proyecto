@@ -213,7 +213,8 @@ public class MainController {
 	// Añade los eventos a la base de datos
 	@PostMapping("/addEvent")
 	public String addEvent(@Valid @ModelAttribute Event event, 
-												  BindingResult result, 
+												  BindingResult result,
+												  HttpSession session, 
 												  Model model,
 												  HttpServletRequest request) {
 
@@ -221,6 +222,7 @@ public class MainController {
 		Event vnt = eventRepository.findByName(event.getName());
 
 		if (vnt != null || result.hasErrors()) {
+			session.setAttribute("eventError", "El evento "+ vnt.getName() +" ya existe");
 			aux = "redirect:private/eventCreator";
 		} else {
 			String userName = request.getRemoteUser();

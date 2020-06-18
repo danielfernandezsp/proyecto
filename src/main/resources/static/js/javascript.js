@@ -9,6 +9,23 @@ function loginStorage() {
 	document.getElementById("userLogin").value = localStorage.getItem("userLocal");
 }
 
+
+// Guarda algunos datos de eventos al crearse
+function eventCreate() {
+	var eventDescription = document.getElementById("eventDescription").value;
+	localStorage.setItem("eventDescription", eventDescription);
+	var preview = document.getElementById("preview").src;
+	localStorage.setItem("preview", preview);
+	
+}
+
+ // Muestra los datos del evento que se intentó crear
+function eventCreateStorage() {
+	document.getElementById("eventDescription").value = localStorage.getItem("eventDescription");
+	document.getElementById("preview").src = localStorage.getItem("preview");
+
+}
+
 // Guarda nombre y apellidos de usuario registrado
 function register() {
 	var nameUser = document.getElementById("name").value;
